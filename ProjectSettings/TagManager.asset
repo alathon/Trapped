@@ -3,9 +3,9 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Player
   - PlanningPhase_TrapsPanel
-  - UIManager
+  - GameController
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -44,11 +44,11 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
-  - name: Foreground
-    userID: 1
-    uniqueID: 2965301773
-    locked: 0
   - name: Background
+    userID: 1
+    uniqueID: 2024226931
+    locked: 0
+  - name: Foreground
     userID: 2
-    uniqueID: 3277449731
+    uniqueID: 3648643245
     locked: 0
