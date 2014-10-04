@@ -11,7 +11,7 @@ using System.Collections;
 /// </summary>
 public class Movement : MonoBehaviour {
     [SerializeField]
-    private float movementSpeed = 1f;
+    private float movementSpeed = 20f;
 
     private Animator animator;
 
