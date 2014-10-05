@@ -11,7 +11,6 @@ public class RecolorTrapImage : MonoBehaviour {
 
     void OnPlacementValidChange(bool isValid)
     {
-        Debug.Log("New valid state: " + isValid);
         this.spriteRenderer.color = isValid ? Color.white : Color.red;
     }
 }

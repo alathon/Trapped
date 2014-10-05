@@ -67,13 +67,16 @@ public class GameController : MonoBehaviour {
     {
         if (this.state.CurrentPlacementPrefab != null)
         {
+            Debug.Log("Destroying CurrentPlacementPrefab: " + this.state.CurrentPlacementPrefab);
             GameObject.Destroy(this.state.CurrentPlacementPrefab);
         }
 
         GameObject trapPrefabInst = Instantiate(this.trapPrefabsManager.GetTrapObjByName(trapName)) as GameObject;
         Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         trapPrefabInst.transform.position = new Vector3(mousePosInWorld.x, mousePosInWorld.y, 0f);
+        trapPrefabInst.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Placing;
         this.state.CurrentPlacementPrefab = trapPrefabInst;
+        Debug.Log("Setting CurrentPlacementPrefab: " + this.state.CurrentPlacementPrefab);
     }
 
     void Update()
@@ -84,12 +87,33 @@ public class GameController : MonoBehaviour {
 
     void PlanningPhase_Update()
     {
-        if (Input.GetMouseButtonDown(0) && this.state.CurrentPlacementPrefab != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            if(this.state.CurrentPlacementPrefab.GetComponent<FollowMouse>().IsPlaced == false) {
-                this.PlanningPhase_TryPlaceTrap();
+            if (this.state.CurrentPlacementPrefab != null)
+            {
+                FollowMouse.PlacementState trapState = this.state.CurrentPlacementPrefab.GetComponent<FollowMouse>().state;
+                if (trapState == FollowMouse.PlacementState.Placing)
+                {
+                    this.PlanningPhase_TryPlaceTrap();
+                }
+                else if (trapState == FollowMouse.PlacementState.Angling)
+                {
+                    this.PlanningPhase_TryFinalizeTrapPosition();
+                }
             } else {
-                this.PlanningPhase_FinalizeTrapPosition();
+                var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 100f);
+                if (hit.collider == null) return;
+
+                GameObject gObj = hit.collider.transform.gameObject;
+
+                // Okay, we've hit a trap.
+                if(gObj.GetComponent<TrapMetadata>() != null) {
+                    FollowMouse fMouse = gObj.GetComponent<FollowMouse>();
+                    fMouse.state = FollowMouse.PlacementState.Placing;
+                    this.state.CurrentPlacementPrefab = gObj;
+                    this.AddTraps(this.state.CurrentPlacementPrefab, 1);
+                }
             }
         }
         else if (Input.GetMouseButtonDown(1))
@@ -114,12 +138,10 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    void PlanningPhase_FinalizeTrapPosition()
+    public void PlanningPhase_PickupTrap(GameObject trapPrefab)
     {
-        GameObject trapPrefab = this.state.CurrentPlacementPrefab;
-        trapPrefab.GetComponent<FollowMouse>().enabled = false;
-        this.state.CurrentPlacementPrefab = null;
-        this.RemoveTraps(trapPrefab, 1);
+        if (this.state.CurrentPlacementPrefab != null) return;
+        this.state.CurrentPlacementPrefab = trapPrefab;
     }
 
     void PlanningPhase_TryPlaceTrap()
@@ -128,7 +150,24 @@ public class GameController : MonoBehaviour {
         Vector3 mousePos = Input.mousePosition;
         if (trapPrefab.GetComponent<ValidTrapPlacement>().IsValid)
         {
-            trapPrefab.GetComponent<FollowMouse>().IsPlaced = true;
+            trapPrefab.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Angling;
+        }
+        else
+        {
+            // TODO: Play a 'bad' sound or somesuch.
+            Debug.Log("Not valid!!");
+        }
+    }
+
+    void PlanningPhase_TryFinalizeTrapPosition()
+    {
+        
+        GameObject trapPrefab = this.state.CurrentPlacementPrefab;
+        if (trapPrefab.GetComponent<ValidTrapPlacement>().IsValid)
+        {
+            trapPrefab.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Placed;
+            this.state.CurrentPlacementPrefab = null;
+            this.RemoveTraps(trapPrefab, 1);
         }
         else
         {
