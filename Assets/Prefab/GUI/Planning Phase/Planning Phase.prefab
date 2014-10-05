@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: .470588237}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04108cad59575ff4496f73ecb3017198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trapMenuPrefab: {fileID: 100002, guid: 1d8d5382849988a449ee35aec703adb6, type: 2}
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -305,7 +306,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: .5}
   m_AnchorMax: {x: 1, y: .5}
   m_AnchoredPosition: {x: -49.5, y: 0}
-  m_SizeDelta: {x: 48, y: 511}
+  m_SizeDelta: {x: 57.9300003, y: 400}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400006
 RectTransform:

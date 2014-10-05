@@ -43,9 +43,20 @@ public class GameController : MonoBehaviour {
         // Add 5 of every trap.
         foreach (GameObject trapPrefab in this.trapPrefabsManager.prefabs)
         {
-            TrapMetadata meta = trapPrefab.GetComponent<TrapMetadata>();
-            TrapCountChanged(meta, this.state.AddTraps(meta, 5));
+            this.AddTraps(trapPrefab, 5);
         }
+    }
+
+    void RemoveTraps(GameObject gObj, int count)
+    {
+        TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
+        TrapCountChanged(meta, this.state.RemoveTraps(meta.trapName, count));
+    }
+
+    void AddTraps(GameObject gObj, int count)
+    {
+        TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
+        TrapCountChanged(meta, this.state.AddTraps(meta.trapName, count));
     }
 
     /// <summary>
@@ -75,9 +86,10 @@ public class GameController : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0) && this.state.CurrentPlacementPrefab != null)
         {
-            if (this.state.CurrentPlacementPrefab != null)
-            {
-                this.PlanningPhase_TryPlaceTrap(this.state.CurrentPlacementPrefab, Input.mousePosition);
+            if(this.state.CurrentPlacementPrefab.GetComponent<FollowMouse>().IsPlaced == false) {
+                this.PlanningPhase_TryPlaceTrap();
+            } else {
+                this.PlanningPhase_FinalizeTrapPosition();
             }
         }
         else if (Input.GetMouseButtonDown(1))
@@ -102,8 +114,26 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    void PlanningPhase_TryPlaceTrap(GameObject trapPrefab, Vector3 mousePos)
+    void PlanningPhase_FinalizeTrapPosition()
     {
+        GameObject trapPrefab = this.state.CurrentPlacementPrefab;
+        trapPrefab.GetComponent<FollowMouse>().enabled = false;
+        this.state.CurrentPlacementPrefab = null;
+        this.RemoveTraps(trapPrefab, 1);
+    }
 
+    void PlanningPhase_TryPlaceTrap()
+    {
+        GameObject trapPrefab = this.state.CurrentPlacementPrefab;
+        Vector3 mousePos = Input.mousePosition;
+        if (trapPrefab.GetComponent<ValidTrapPlacement>().IsValid)
+        {
+            trapPrefab.GetComponent<FollowMouse>().IsPlaced = true;
+        }
+        else
+        {
+            // TODO: Play a 'bad' sound or somesuch.
+            Debug.Log("Not valid!!");
+        }
     }
 }

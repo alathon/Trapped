@@ -12,30 +12,30 @@ namespace Assets.Scripts.Controllers
     {
         public Phase currentPhase = Phase.Planning;
         public GameObject CurrentPlacementPrefab;
-        private Dictionary<TrapMetadata, int> unplacedTraps = new Dictionary<TrapMetadata,int>();
+        private Dictionary<string, int> unplacedTraps = new Dictionary<string,int>();
 
-        public int AddTraps(TrapMetadata metadata, int count)
+        public int AddTraps(String name, int count)
         {
-            if (!this.unplacedTraps.ContainsKey(metadata))
+            if (!this.unplacedTraps.ContainsKey(name))
             {
-                this.unplacedTraps.Add(metadata, count);
+                this.unplacedTraps.Add(name, count);
             } else {
-                this.unplacedTraps[metadata] += count;
+                this.unplacedTraps[name] += count;
             }
-            return this.unplacedTraps[metadata];
+            return this.unplacedTraps[name];
         }
 
-        public int RemoveTraps(TrapMetadata metadata, int count)
+        public int RemoveTraps(String name, int count)
         {
-            if (this.unplacedTraps.ContainsKey(metadata))
+            if (this.unplacedTraps.ContainsKey(name))
             {
-                this.unplacedTraps[metadata] -= count;
-                if (this.unplacedTraps[metadata] <= 0)
+                this.unplacedTraps[name] -= count;
+                if (this.unplacedTraps[name] <= 0)
                 {
-                    this.unplacedTraps.Remove(metadata);
+                    this.unplacedTraps.Remove(name);
                     return 0;
                 }
-                return this.unplacedTraps[metadata];
+                return this.unplacedTraps[name];
             }
 
             return 0;
