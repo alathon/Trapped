@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ResourceUpdate : MonoBehaviour {
     private Text resourceText;
 
-    void Awake()
+    void Start()
     {
         GameController controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         controller.ResourceChanged += new GameController.ResourceChangedHandler(OnResourceChange);

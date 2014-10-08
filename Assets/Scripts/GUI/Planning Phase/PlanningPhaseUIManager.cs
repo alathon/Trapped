@@ -19,7 +19,7 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     /// </summary>
     private GameObject trapPanel;
 
-    void Awake()
+    void Start()
     {
         this.trapPanel = GameObject.FindGameObjectWithTag("PlanningPhase_TrapsPanel");
         this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();

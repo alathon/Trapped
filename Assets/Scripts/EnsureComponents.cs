@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnsureComponents : MonoBehaviour {
-    void Start()
+    void Awake()
     {
         GameObject controller = GameObject.FindGameObjectWithTag("GameController");
         if (controller == null)
