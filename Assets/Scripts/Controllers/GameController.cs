@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
     {
         this.trapPrefabsManager = this.GetComponent<TrapPrefabsManager>();
         state = new GameState();
-        Invoke("SetupDummyState", 0.1f);
+        Invoke("SetupDummyState", 0.5f);
     }
 
     /// <summary>
@@ -63,13 +63,19 @@ public class GameController : MonoBehaviour {
     void RemoveTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
-        TrapCountChanged(meta, this.state.RemoveTraps(meta.trapName, count));
+        if (TrapCountChanged != null)
+        {
+            TrapCountChanged(meta, this.state.RemoveTraps(meta.trapName, count));
+        }
     }
 
     void AddTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
-        TrapCountChanged(meta, this.state.AddTraps(meta.trapName, count));
+        if (TrapCountChanged != null)
+        {
+            TrapCountChanged(meta, this.state.AddTraps(meta.trapName, count));
+        }   
     }
 
 

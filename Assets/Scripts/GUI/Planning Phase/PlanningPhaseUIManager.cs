@@ -18,9 +18,7 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     /// The panel that contains traps (The trap menu panel).
     /// </summary>
     private GameObject trapPanel;
-
     private GameObject planningPhaseGUI;
-
     private CanvasGroup canvasGroup;
 
     void Start()
