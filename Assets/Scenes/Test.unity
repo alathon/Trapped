@@ -651,9 +651,9 @@ MonoBehaviour:
   generateOnUpdate: 1
   navObstacles:
   - {fileID: 1501952000}
+  - {fileID: 586143363}
   - {fileID: 1161790706}
   - {fileID: 772440488}
-  - {fileID: 586143363}
   inflateRadius: .150000006
   masterCollider: {fileID: 704228980}
 --- !u!60 &704228980
@@ -2059,7 +2059,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1802541974}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Poly:
     m_Paths:
     - - {x: 256, y: -384}
