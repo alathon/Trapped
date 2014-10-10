@@ -3,14 +3,15 @@ using System.Collections;
 using Assets.Scripts.Controllers;
 
 public class GameController : MonoBehaviour {
-    /// <summary>
-    /// The prefab used in the planning phase trap panel.
-    /// </summary>
-    [SerializeField]
-    private GameObject trapPanelPrefab;
-
     private TrapPrefabsManager trapPrefabsManager;
     private GameState state;
+
+    /// <summary>
+    /// Signalled when the amount of life changes.
+    /// </summary>
+    /// <param name="newLife"></param>
+    public delegate void LifeChangedHandler(int newLife);
+    public event LifeChangedHandler LifeChanged;
 
     /// <summary>
     /// Signalled when the amount of player resources available changes.
@@ -38,8 +39,20 @@ public class GameController : MonoBehaviour {
         Invoke("SetupDummyState", 0.1f);
     }
 
+    /// <summary>
+    /// Used by e.g. LifeManager to know how much life is the maximum.
+    /// </summary>
+    /// <returns>
+    /// Total amount of life (should be divisible by 2!).
+    /// </returns>
+    public int GetLifeMax()
+    {
+        return this.state.lifeMax;
+    }
+
     private void SetupDummyState()
     {
+        this.PlanningPhase_Start();
         // Add 5 of every trap.
         foreach (GameObject trapPrefab in this.trapPrefabsManager.prefabs)
         {
@@ -59,6 +72,46 @@ public class GameController : MonoBehaviour {
         TrapCountChanged(meta, this.state.AddTraps(meta.trapName, count));
     }
 
+
+    void Update()
+    {
+        if (this.state.currentPhase == Phase.Planning) PlanningPhase_Update();
+        else if (this.state.currentPhase == Phase.Action) ActionPhase_Update();
+    }
+
+    // ACTION PHASE
+    void ActionPhase_Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 100f);
+            if (hit.collider == null) return;
+
+            GameObject gObj = hit.collider.transform.gameObject;
+
+            // Okay, we've hit a trap.
+            if (gObj.GetComponent<TrapMetadata>() != null)
+            {
+                gObj.GetComponent<TrapAction>().Trigger();
+            }
+        }
+    }
+
+    void ActionPhase_Start()
+    {
+        GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().ActivateGUI();
+        this.state.currentPhase = Phase.Action;
+        Instantiate(Resources.Load("TestEnemy"), new Vector3(4.62f, -3.755f, 0f), Quaternion.identity);
+    }
+
+    void ActionPhase_TryEndPhase()
+    {
+        GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().DeactivateGUI();
+    }
+
+    // PLANNING PHASE
+
     /// <summary>
     /// During Planning Phase, when trap bar icon is clicked on to place a trap.
     /// </summary>
@@ -67,7 +120,6 @@ public class GameController : MonoBehaviour {
     {
         if (this.state.CurrentPlacementPrefab != null)
         {
-            Debug.Log("Destroying CurrentPlacementPrefab: " + this.state.CurrentPlacementPrefab);
             GameObject.Destroy(this.state.CurrentPlacementPrefab);
         }
 
@@ -76,13 +128,25 @@ public class GameController : MonoBehaviour {
         trapPrefabInst.transform.position = new Vector3(mousePosInWorld.x, mousePosInWorld.y, 0f);
         trapPrefabInst.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Placing;
         this.state.CurrentPlacementPrefab = trapPrefabInst;
-        Debug.Log("Setting CurrentPlacementPrefab: " + this.state.CurrentPlacementPrefab);
     }
 
-    void Update()
+
+    public void PlanningPhase_OnClickEndPhaseBtn()
     {
-        if (this.state.currentPhase == Phase.Planning) PlanningPhase_Update();
-        else if (this.state.currentPhase == Phase.Action) ActionPhase_Update();
+        this.PlanningPhase_TryEndPhase();
+        this.ActionPhase_Start();
+    }
+
+    void PlanningPhase_TryEndPhase()
+    {
+        // TODO: Any criterion for ending the phase???
+        GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().DeactivateGUI();
+    }
+
+    void PlanningPhase_Start()
+    {
+        GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().ActivateGUI();
+        this.state.currentPhase = Phase.Planning;
     }
 
     void PlanningPhase_Update()
@@ -122,10 +186,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    void ActionPhase_Update()
-    {
 
-    }
 
     /// <summary>
     /// Cancel any on-going action.
@@ -147,7 +208,6 @@ public class GameController : MonoBehaviour {
     void PlanningPhase_TryPlaceTrap()
     {
         GameObject trapPrefab = this.state.CurrentPlacementPrefab;
-        Vector3 mousePos = Input.mousePosition;
         if (trapPrefab.GetComponent<ValidTrapPlacement>().IsValid)
         {
             trapPrefab.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Angling;

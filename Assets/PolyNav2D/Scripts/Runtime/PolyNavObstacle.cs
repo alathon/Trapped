@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(PolygonCollider2D))]
@@ -9,6 +10,7 @@ public class PolyNavObstacle : MonoBehaviour {
 
 	///Inverts the polygon (done automatically if collider already exists due to a sprite)
 	public bool invertPolygon = false;
+    public bool useTriggerPolygon = true;
 
 	private Vector3 lastPos;
 	private Quaternion lastRot;
@@ -29,7 +31,7 @@ public class PolyNavObstacle : MonoBehaviour {
 	public Vector2[] points{
 		get
 		{
-			Vector2[] tempPoints = polyCollider.points;
+            Vector2[] tempPoints = polyCollider.points;
 
 			if (invertPolygon)
 				System.Array.Reverse(tempPoints);
@@ -52,8 +54,12 @@ public class PolyNavObstacle : MonoBehaviour {
 
 		if (polyNav)
 			polyNav.AddObstacle(this);
-		
-		polyCollider.isTrigger = true;
+
+        if (useTriggerPolygon)
+            polyCollider.isTrigger = true;
+        else
+            polyCollider.isTrigger = false;
+
 		lastPos = transform.position;
 		lastRot = transform.rotation;
 		lastScale = transform.localScale;

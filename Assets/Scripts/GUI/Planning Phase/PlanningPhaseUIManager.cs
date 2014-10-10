@@ -19,11 +19,36 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     /// </summary>
     private GameObject trapPanel;
 
-    void Awake()
+    private GameObject planningPhaseGUI;
+
+    private CanvasGroup canvasGroup;
+
+    void Start()
     {
+        this.planningPhaseGUI = GameObject.FindGameObjectWithTag("PlanningPhase_GUI");
         this.trapPanel = GameObject.FindGameObjectWithTag("PlanningPhase_TrapsPanel");
         this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         this.controller.TrapCountChanged += new GameController.TrapCountChangedHandler(OnTrapCountChanged);
+        this.canvasGroup = this.planningPhaseGUI.GetComponent<CanvasGroup>();
+    }
+
+    public void ActivateGUI()
+    {
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public void DeactivateGUI()
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+    }
+
+    public void OnClickEndPhaseBtn()
+    {
+        this.controller.PlanningPhase_OnClickEndPhaseBtn();
     }
 
     /// <summary>
@@ -61,6 +86,7 @@ public class PlanningPhaseUIManager : MonoBehaviour {
 
                 // Register click handler.
                 gObj.GetComponent<Button>().onClick.AddListener(delegate { OnClickTrapBar(trapName); });
+
                 // Alternative way:
                 // UnityEngine.Events.UnityAction action = () => { OnClickTrapBar(meta.name); };
                 // trap.GetComponent<Button>().onClick.AddListener(action);

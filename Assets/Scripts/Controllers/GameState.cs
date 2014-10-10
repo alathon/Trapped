@@ -11,6 +11,13 @@ namespace Assets.Scripts.Controllers
     class GameState
     {
         public Phase currentPhase = Phase.Planning;
+
+        // Action Phase
+        public int lifeLeft = 10;
+        // Maximum amount.
+        public int lifeMax = 10;
+
+        // Planning Phase
         public GameObject CurrentPlacementPrefab;
         private Dictionary<string, int> unplacedTraps = new Dictionary<string,int>();
 

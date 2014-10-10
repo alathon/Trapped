@@ -175,21 +175,6 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110201035
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: elphaIdleLeft
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400000, guid: b70f65009f741584d8421b8f1648f1e0, type: 2}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 201, y: 99, z: 0}
-  m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
 --- !u!1102 &110202235
 State:
   m_ObjectHideFlags: 3
@@ -220,36 +205,6 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110251865
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: elphaIdleUp
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400000, guid: d967f912365813547be11a04bfbf0070, type: 2}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 131, y: -31, z: 0}
-  m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
---- !u!1102 &110260471
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: elphaIdleRight
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400000, guid: 2fa440acbaadcf14c849dcdaddb830d6, type: 2}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 236, y: 164, z: 0}
-  m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
 --- !u!1102 &110281439
 State:
   m_ObjectHideFlags: 3
@@ -265,21 +220,6 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110290463
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: elphaIdleDown
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400000, guid: d94095fd2ea40d94e91fffdff233e8e8, type: 2}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 166, y: 34, z: 0}
-  m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
 --- !u!1107 &110700000
 StateMachine:
   serializedVersion: 2
@@ -291,10 +231,6 @@ StateMachine:
   m_States:
   - {fileID: 110200000}
   - {fileID: 110281439}
-  - {fileID: 110251865}
-  - {fileID: 110290463}
-  - {fileID: 110201035}
-  - {fileID: 110260471}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:

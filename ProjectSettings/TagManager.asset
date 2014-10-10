@@ -5,7 +5,13 @@ TagManager:
   tags:
   - PlanningPhase_TrapsPanel
   - GameController
-  - 
+  - PlanningPhase_GUI
+  - ActionPhase_GUI
+  - Heart1
+  - Heart2
+  - Heart3
+  - ActionPhase_LifePanel
+  - Enemy
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -15,8 +21,8 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: Obstacles
-  User Layer 9: 
+  User Layer 8: Walkable
+  User Layer 9: Obstacles
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 
@@ -48,7 +54,15 @@ TagManager:
     userID: 1
     uniqueID: 2024226931
     locked: 0
-  - name: Foreground
+  - name: Objects
     userID: 2
     uniqueID: 3648643245
+    locked: 0
+  - name: Foreground
+    userID: 3
+    uniqueID: 1372922229
+    locked: 0
+  - name: Flying
+    userID: 4
+    uniqueID: 2463656441
     locked: 0

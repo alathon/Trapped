@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32">
  <properties>
   <property name="unity:scale" value="0.01"/>
   <property name="unity:sortingLayerName" value="Background"/>
@@ -8,6 +8,35 @@
   <image source="../Spritesheets/base_out_atlas.png" width="1024" height="1024"/>
   <tile id="79">
    <objectgroup draworder="index"/>
+  </tile>
+  <tile id="217">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="218">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="248">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="249">
+   <objectgroup draworder="index">
+    <object x="0" y="0">
+     <polygon points="0,0 16,0 16,24 32,24 32,32 0,32"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="250">
+   <objectgroup draworder="index">
+    <object x="0" y="16">
+     <polygon points="0,0 16,0 16,-16 32,-16 32,16 0,16"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="268">
    <objectgroup draworder="index">
@@ -43,6 +72,21 @@
     </object>
    </objectgroup>
   </tile>
+  <tile id="280">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="281">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="282">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
   <tile id="300">
    <objectgroup draworder="index">
     <object x="0" y="0" width="32" height="32"/>
@@ -59,6 +103,21 @@
    </objectgroup>
   </tile>
   <tile id="305">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="312">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="313">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="314">
    <objectgroup draworder="index">
     <object x="0" y="0" width="16" height="32"/>
    </objectgroup>
@@ -97,6 +156,21 @@
     </object>
    </objectgroup>
   </tile>
+  <tile id="344">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="345">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="346">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
   <tile id="993">
    <objectgroup draworder="index"/>
   </tile>
@@ -104,15 +178,15 @@
  <tileset firstgid="1025" name="Atlas2" tilewidth="32" tileheight="32">
   <image source="../Spritesheets/build_atlas.png" trans="ffffff" width="1024" height="1024"/>
  </tileset>
- <layer name="Tile Layer 1" width="20" height="20">
+ <layer name="Floor" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJwLYGBgCKQSDgLiAiAupBIuGjVv1LxR80bNGzWPauZNAOKJVMKTgBgAavawkQ==
-  </data>
- </layer>
- <layer name="Tile Layer 2" width="20" height="20">
-  <data encoding="base64" compression="zlib">
-   eJxjYBi+gJeRgYEPiPkZqWOeLtAcPSDWp5J5vkBz/IDYn0rmUQpGw4v+QADoF0EgFqKSnwyA5hgCsRGVzAsAmhMIxEHDKMxHAfUAAFlTBRE=
+   eJzt2MEJwCAMQNGM7rSdowuYQ6VRCe9BjmI+3ozgNs+hqehYPfd1v+qOsXl05HTo0JHTcV9HFO2bjffI6dDRqePvFh06dOQ6dexW1dHlz2TmxJ0AAAAA0NELvKx3LA==
   </data>
  </layer>
  <objectgroup name="Object Layer 1"/>
+ <layer name="Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt100KgCAQhmE9lnSS6uZ1k1blQpDB39BSeB8QWshMH2qSUkA/xzM2nR9n4bzcWHSfHKV1TaP+5GhTd03sNym1V//OERNap1RNcqSV1nV7Re6j2XK4efK9ydGW/LY48juzD56jti453vUrJeuazF01S47YvR06Q/58e378Z2um+3yUfuQYqx85xup39Skb1StHi3/umrF/vP4AAAAAAAAA4NyxxTik
+  </data>
+ </layer>
 </map>

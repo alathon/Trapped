@@ -435,11 +435,11 @@ public class PolyNav2D : MonoBehaviour {
 
 
 		//the inflated polygons
-        foreach (Polygon pathPoly in map.masterPolygons)
-        	DebugDrawPolygon(pathPoly.points, new Color(1f,1f,1f,0.2f));
+        //foreach (Polygon pathPoly in map.masterPolygons)
+        //    DebugDrawPolygon(pathPoly.points, new Color(1f,1f,1f,0.2f));
 
-		foreach(Polygon poly in map.obstaclePolygons)
-			DebugDrawPolygon(poly.points, new Color(1, 0.7f, 0.7f, 0.1f));
+        //foreach(Polygon poly in map.obstaclePolygons)
+        //    DebugDrawPolygon(poly.points, new Color(1, 0.7f, 0.7f, 0.1f));
 
 	}
 

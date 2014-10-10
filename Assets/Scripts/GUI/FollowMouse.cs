@@ -12,13 +12,7 @@ public class FollowMouse : MonoBehaviour {
         Placing, Angling, Placed
     }
 
-    private GameController controller;
     public PlacementState state;
-
-    void Awake()
-    {
-        this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-    }
 
     /// <summary>
     /// When not placed, change position.
@@ -41,13 +35,4 @@ public class FollowMouse : MonoBehaviour {
             }
         }
 	}
-
-    void OnMouseOver()
-    {
-        //Debug.Log("Mousing over...");
-        //if (Input.GetMouseButtonDown(0) && state == PlacementState.Placed)
-        //{
-        //    this.controller.PlanningPhase_PickupTrap(this.gameObject);
-        //}
-    }
 }

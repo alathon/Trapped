@@ -2,3 +2,13 @@ Art Attributions:
 
 
 Clint Bellanger - http://clintbellanger.net (Red gem icon)
+
+C. Nilsson - http://opengameart.org/content/simple-small-pixel-hearts (16x16 Heart image)
+
+C. Bellanger - http://opengameart.org/content/fireball-spell (Fireball)
+C. Bellanger - http://opengameart.org/content/lightning-shock-spell (Lightning Shock)
+C. Bellanger - http://opengameart.org/content/freeze-spell (Freeze spell)
+C. Bellanger - http://opengameart.org/content/quake-spell (Quake spell)
+C. Bellanger - http://opengameart.org/content/projectiles (Projectiles)
+C. Bellanger - http://opengameart.org/content/sparks-fire-ice-blood (Sparks)
+C. Bellanger - http://opengameart.org/content/icicle-spell (Icicle spell)

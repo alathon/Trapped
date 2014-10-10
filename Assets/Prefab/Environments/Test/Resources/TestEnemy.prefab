@@ -9,13 +9,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  - 95: {fileID: 9500000}
+  - 50: {fileID: 5000000}
+  - 61: {fileID: 6100000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 50: {fileID: 5000000}
+  - 95: {fileID: 9500000}
   m_Layer: 0
-  m_Name: Elphaba
-  m_TagString: Untagged
+  m_Name: TestEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.15699995, y: -5.26520014, z: 0}
+  m_LocalPosition: {x: 3.35399199, y: -3.42154551, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -38,15 +39,26 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_FixedAngle: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!61 &6100000
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: .200823471, y: .140804768}
+  m_Center: {x: .00458359718, y: .00727772713}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -70,20 +82,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
+  m_Script: {fileID: 11500000, guid: e41abaaa35d9b7b488350b3cda831d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1
-  mass: 20
-  stoppingDistance: .300000012
-  slowingDistance: .100000001
-  decelerationRate: 2
-  closerPointOnInvalid: 1
-  rotateTransform: 0
-  rotateSpeed: 350
-  sendMessages: 1
-  debugPath: 1
-  avoidRadius: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,9 +93,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e41abaaa35d9b7b488350b3cda831d92, type: 3}
+  m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 1.5
+  mass: 1
+  stoppingDistance: .25
+  slowingDistance: .180000007
+  decelerationRate: 2
+  closerPointOnInvalid: 1
+  rotateTransform: 0
+  rotateSpeed: 2
+  sendMessages: 1
+  debugPath: 1
+  avoidRadius: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -113,7 +125,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 2965301773
+  m_SortingLayerID: 1372922229
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fe61f90647557f84e9bdb485414d893e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
