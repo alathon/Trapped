@@ -12,6 +12,7 @@ TagManager:
   - Heart3
   - ActionPhase_LifePanel
   - Enemy
+  - Hitbox
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

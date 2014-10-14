@@ -3,13 +3,13 @@ using System.Collections;
 
 public class TrapAction : MonoBehaviour {
     [SerializeField]
-    private float reuseTime = 0f;
+    protected float reuseTime = 0f;
 
     [SerializeField]
-    private float windupTime = 0f;
+    protected float windupTime = 0f;
 
     [SerializeField]
-    private float duration = 1f;
+    protected float duration = 1f;
 
     public bool IsReuseable()
     {
@@ -18,6 +18,24 @@ public class TrapAction : MonoBehaviour {
 
     public virtual void Trigger()
     {
+        if (windupTime > 0)
+        {
+            StartCoroutine(Windup());
+        }
+        else
+        {
+            StartCoroutine(Action());
+        }
+    }
 
+    protected virtual IEnumerator Windup()
+    {
+        yield return new WaitForSeconds(this.windupTime);
+        yield return StartCoroutine(Action());
+    }
+
+    protected virtual IEnumerator Action()
+    {
+        yield return new WaitForSeconds(this.duration);
     }
 }

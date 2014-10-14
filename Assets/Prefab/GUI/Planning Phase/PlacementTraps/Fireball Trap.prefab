@@ -113,11 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca76f0aad57f2c40bce5a5d30f01272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reuseTime: 0
-  windupTime: 0
-  duration: 1
+  reuseTime: 10
+  windupTime: 1
+  duration: 1.5
   prefab: {fileID: 100000, guid: 17fed7cb1486e614c98c30d1000ea60a, type: 2}
   fireballSpeed: .800000012
+  fireballs: 5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
