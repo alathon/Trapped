@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 95: {fileID: 9500000}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -177,8 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41abaaa35d9b7b488350b3cda831d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLife: 100
-  maximumLife: 100
+  attackRange: .300000012
+  attackDamage: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,6 +262,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959265c795c53b747b299979bc42a6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLife: 2
+  maximumLife: 2
+  hpBarPath: HP Bar/Background/Fill
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

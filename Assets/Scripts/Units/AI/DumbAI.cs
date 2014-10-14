@@ -2,8 +2,13 @@
 using System.Collections;
 
 [RequireComponent(typeof(PolyNavAgent))]
+[RequireComponent(typeof(UnitState))]
 public class DumbAI : AI {
+    private bool attacking = false;
+
     private GameObject player;
+    private UnitState playerState;
+
     private Animator animator;
     private bool flashing = false;
 
@@ -17,15 +22,56 @@ public class DumbAI : AI {
 		}
 	}
 
+    [SerializeField]
+    private float attackRange = 0.3f;
+
+    [SerializeField]
+    private int attackDamage = 1;
+
+    [SerializeField]
+    private float attackSpeed = 0.5f;
+
+    void Awake()
+    {
+        this.GetComponent<UnitState>().LifeChanged += new UnitState.LifeChangedHandler(OnLifeChanged);
+    }
+
     override protected void InitializeAI()
     {
         this.player = GameObject.FindGameObjectWithTag("Player");
+        this.playerState = this.player.GetComponent<UnitState>();
         this.animator = this.GetComponent<Animator>();
 	}
 
     override protected void AIRoutine()
     {
-        this.agent.SetDestination(player.transform.position);
+        if (this.playerState.IsDead())
+        {
+            this.agent.Stop();
+            return;
+        }
+
+        float dist = Vector2.Distance(this.transform.position, this.player.transform.position);
+        if (dist > this.attackRange)
+        {
+            this.agent.SetDestination(player.transform.position);
+        }
+        else
+        {
+            if (attacking) return;
+
+            StartCoroutine(Attack());
+        }
+        
+    }
+
+    IEnumerator Attack()
+    {
+        this.attacking = true;
+        this.playerState.TakeDamage(this.attackDamage);
+        yield return new WaitForSeconds(this.attackSpeed);
+        this.attacking = false;
+        yield break;
     }
 
     //Message from Agent
@@ -41,10 +87,11 @@ public class DumbAI : AI {
 
     }
 
-    public override void TakeDamage(int amount)
+    private void OnLifeChanged(int amount, bool tookDamage)
     {
-        base.TakeDamage(amount);
-        StartCoroutine(FlashRed());
+        if (tookDamage) {
+            StartCoroutine(FlashRed());
+        }
     }
 
     private IEnumerator FlashRed()
@@ -84,5 +131,7 @@ public class DumbAI : AI {
         {
             animator.SetBool("Walking", false);
         }
+
+
 	}
 }

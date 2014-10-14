@@ -90,8 +90,8 @@ public class PlanningPhaseUIManager : MonoBehaviour {
                 // trap.GetComponent<Button>().onClick.AddListener(action);
 
                 // Set position on screen.
-                // Base offset = 25px; Size of actual trap widget is 35px, so a 5px buffer between each.
-                gObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -25 - (this.panels.Count * 40));
+                // Base offset = 45px; Size of actual trap widget is 35px, so a 5px buffer between each = 40px.
+                gObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -45 - (this.panels.Count * 40));
 
                 // Set child image (actual trap image) to proper menu sprite item.
                 foreach (Image img in gObj.GetComponentsInChildren<Image>())

@@ -5,6 +5,7 @@ using Assets.Scripts.Controllers;
 public class GameController : MonoBehaviour {
     private TrapPrefabsManager trapPrefabsManager;
     private GameState state;
+    private GameObject player;
 
     /// <summary>
     /// Signalled when the phase changes.
@@ -12,13 +13,6 @@ public class GameController : MonoBehaviour {
     /// <param name="newPhase"></param>
     public delegate void PhaseChangedHandler(Phase newPhase);
     public event PhaseChangedHandler PhaseChanged;
-
-    /// <summary>
-    /// Signalled when the amount of life changes.
-    /// </summary>
-    /// <param name="newLife"></param>
-    public delegate void LifeChangedHandler(int newLife);
-    public event LifeChangedHandler LifeChanged;
 
     /// <summary>
     /// Signalled when the amount of player resources available changes.
@@ -41,9 +35,16 @@ public class GameController : MonoBehaviour {
 
     void Awake()
     {
+        this.player = GameObject.FindGameObjectWithTag("Player");
+        this.player.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnPlayerDeath);
         this.trapPrefabsManager = this.GetComponent<TrapPrefabsManager>();
         state = new GameState();
         Invoke("SetupDummyState", 0.5f);
+    }
+
+    public void OnPlayerDeath(GameObject gObj)
+    {
+        // TODO: Stuff happening on death.
     }
 
     /// <summary>
@@ -57,6 +58,9 @@ public class GameController : MonoBehaviour {
         return this.state.lifeMax;
     }
 
+    /// <summary>
+    /// Dummy state for test level (5 of each trap type).
+    /// </summary>
     private void SetupDummyState()
     {
         this.PlanningPhase_Start();
@@ -67,6 +71,15 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Removes a certain number of a kind of trap.
+    /// </summary>
+    /// <param name="gObj">
+    /// The trap prefab.
+    /// </param>
+    /// <param name="count">
+    /// The amount of traps to remove.
+    /// </param>
     void RemoveTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
@@ -76,6 +89,15 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Adds a certain number of a kind of trap.
+    /// </summary>
+    /// <param name="gObj">
+    /// The trap prefab.
+    /// </param>
+    /// <param name="count">
+    /// The amount of traps to add.
+    /// </param>
     void AddTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
@@ -85,6 +107,17 @@ public class GameController : MonoBehaviour {
         }   
     }
 
+    /// <summary>
+    /// Changes the state of the game and triggers an event for it.
+    /// </summary>
+    /// <param name="newPhase">
+    /// The phase to enter into.
+    /// </param>
+    void SetState(Phase newPhase)
+    {
+        this.state.currentPhase = newPhase;
+        this.PhaseChanged(this.state.currentPhase);
+    }
 
     void Update()
     {
@@ -93,6 +126,10 @@ public class GameController : MonoBehaviour {
     }
 
     // ACTION PHASE
+
+    /// <summary>
+    /// Checks for clicks to trigger traps.
+    /// </summary>
     void ActionPhase_Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -112,18 +149,20 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Called when the action phase begins. Shows the action phase canvas and
+    /// changes the gamestate to be in the action phase.
+    /// </summary>
     void ActionPhase_Start()
     {
         GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().ActivateGUI();
         this.SetState(Phase.Action);
     }
 
-    void SetState(Phase newPhase)
-    {
-        this.state.currentPhase = newPhase;
-        this.PhaseChanged(this.state.currentPhase);
-    }
 
+    /// <summary>
+    /// Called when the action phase should end. Hides the action phase canvas.
+    /// </summary>
     void ActionPhase_TryEndPhase()
     {
         GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().DeactivateGUI();
@@ -149,13 +188,18 @@ public class GameController : MonoBehaviour {
         this.state.CurrentPlacementPrefab = trapPrefabInst;
     }
 
-
+    /// <summary>
+    /// During Planning Phase, when the 'End Phase' button is clicked.
+    /// </summary>
     public void PlanningPhase_OnClickEndPhaseBtn()
     {
         this.PlanningPhase_TryEndPhase();
         this.ActionPhase_Start();
     }
 
+    /// <summary>
+    /// Ends the planning phase, hiding the planning phase canvas.
+    /// </summary>
     void PlanningPhase_TryEndPhase()
     {
         // TODO: Any criterion for ending the phase???
@@ -168,6 +212,10 @@ public class GameController : MonoBehaviour {
         this.SetState(Phase.Planning);
     }
 
+    /// <summary>
+    /// Checks for button clicks, used to place or pick up traps during the planning phase.
+    /// 
+    /// </summary>
     void PlanningPhase_Update()
     {
         if (Input.GetMouseButtonDown(0))

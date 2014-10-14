@@ -83,7 +83,7 @@ public class TimedSpawner : MonoBehaviour {
                     GameObject prefab = this.prefabs[Random.Range(0, this.prefabs.Length - 1)];
                     GameObject mob = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
                     this.spawnedMobs.Add(mob);
-                    mob.GetComponent<AI>().Death += new AI.DeathHandler(OnMobDeath);
+                    mob.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnMobDeath);
                     this.totalAmount--;
                 }
 

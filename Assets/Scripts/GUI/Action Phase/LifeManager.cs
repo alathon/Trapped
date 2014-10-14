@@ -44,17 +44,18 @@ public class LifeManager : MonoBehaviour {
             GameObject heartObj = (GameObject)Instantiate(this.heartImagePrefab);
             heartObj.transform.SetParent(this.transform, false);
             heartObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(10 + (i * 32), 0);
+            this.hearts[i] = heartObj;
         }
     }
 
 	void Start () {
-        GameObject gObj = GameObject.FindGameObjectWithTag("GameController");
-        GameController controller = gObj.GetComponent<GameController>();
-        this.ChangeLifeMax(controller.GetLifeMax());
-        controller.LifeChanged += new GameController.LifeChangedHandler(OnLifeChanged);
+        GameObject gObj = GameObject.FindGameObjectWithTag("Player");
+        UnitState state = gObj.GetComponent<UnitState>();
+        this.ChangeLifeMax(state.MaximumLife);
+        state.LifeChanged += new UnitState.LifeChangedHandler(OnLifeChanged);
 	}
 
-    public void OnLifeChanged(int newLife)
+    public void OnLifeChanged(int newLife, bool tookDamage)
     {
         this.SetLife(newLife);
     }

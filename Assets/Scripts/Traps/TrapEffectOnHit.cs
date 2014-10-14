@@ -14,21 +14,26 @@ public class TrapEffectOnHit : MonoBehaviour {
         }
         else if (target.tag.Equals("Enemy"))
         {
-            AI ai = target.GetComponent<AI>();
-            if (ai != null)
+            UnitState state = target.GetComponent<UnitState>();
+            if (state != null)
             {
-                ai.TakeDamage(this.damage);
+                state.TakeDamage(this.damage);
                 GameObject.Destroy(this.gameObject);
             }
         }
         else if (target.tag.Equals("Hitbox"))
         {
-            AI ai = target.transform.parent.GetComponent<AI>();
-            if (ai != null)
+            Transform tParent = target.transform.parent;
+            if (tParent.GetComponent<AI>() != null)
             {
-                ai.TakeDamage(this.damage);
-                GameObject.Destroy(this.gameObject);
+                UnitState state = tParent.GetComponent<UnitState>();
+                if (state != null)
+                {
+                    state.TakeDamage(this.damage);
+                    GameObject.Destroy(this.gameObject);
+                }
             }
+            
         }
     }
 }
