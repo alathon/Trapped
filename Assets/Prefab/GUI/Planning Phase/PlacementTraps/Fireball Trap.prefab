@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Fireball Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.15398431, y: -2.27362204, z: 0}
+  m_LocalPosition: {x: 3.34204817, y: -2.82745194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,16 +45,12 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_Poly:
     m_Paths:
-    - - {x: .0588452816, y: .150261879}
-      - {x: -.109999895, y: .116746902}
-      - {x: -.136247873, y: .0397417545}
-      - {x: -.181636095, y: -.0290529728}
-      - {x: -.159999967, y: -.140998125}
-      - {x: -.0590806007, y: -.168031693}
-      - {x: .0804989338, y: -.121996641}
-      - {x: .136247635, y: -.0909979343}
-      - {x: .17564106, y: .00464868546}
-      - {x: .150499105, y: .111996412}
+    - - {x: -.142902374, y: -.013957262}
+      - {x: -.141877174, y: -.202247858}
+      - {x: .1544981, y: -.204950809}
+      - {x: .126196384, y: -.0324347019}
+      - {x: .0827877522, y: .141684294}
+      - {x: -.0163757801, y: .210885048}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,9 +77,9 @@ MonoBehaviour:
   trapName: Fireball Trap
   canPlaceInWall: 1
   isDirectional: 1
-  placementSprite: {fileID: 21300414, guid: af98bdcdea15066448586341be50d2cc, type: 3}
-  ingameSprite: {fileID: 21300414, guid: af98bdcdea15066448586341be50d2cc, type: 3}
-  menuSprite: {fileID: 21300414, guid: af98bdcdea15066448586341be50d2cc, type: 3}
+  placementSprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
+  ingameSprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
+  menuSprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,6 +117,7 @@ MonoBehaviour:
   windupTime: 0
   duration: 1
   prefab: {fileID: 100000, guid: 17fed7cb1486e614c98c30d1000ea60a, type: 2}
+  fireballSpeed: .800000012
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -141,7 +138,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2463656441
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300414, guid: af98bdcdea15066448586341be50d2cc, type: 3}
+  m_Sprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

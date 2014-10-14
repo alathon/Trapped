@@ -39,7 +39,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
@@ -96,17 +96,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1.5
-  mass: 1
+  maxSpeed: 1
+  mass: 25
   stoppingDistance: .25
-  slowingDistance: .180000007
-  decelerationRate: 2
+  slowingDistance: 0
+  decelerationRate: 0
   closerPointOnInvalid: 1
   rotateTransform: 0
-  rotateSpeed: 2
+  rotateSpeed: 10
   sendMessages: 1
   debugPath: 1
-  avoidRadius: 0
+  avoidRadius: .150000006
+  lookAhead: .100000001
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

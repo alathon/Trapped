@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class AI : MonoBehaviour {
+    public delegate void DeathHandler(GameObject gObj);
+    public event DeathHandler Death;
+
     private int currentLife = 2;
 
     public int CurrentLife
@@ -20,7 +23,7 @@ public class AI : MonoBehaviour {
 
     protected virtual void Die()
     {
-        GameObject.Destroy(this.transform.gameObject);
+        Death(this.gameObject);
     }
 
     public virtual void TakeDamage(int amount)

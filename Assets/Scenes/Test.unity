@@ -654,7 +654,7 @@ MonoBehaviour:
   - {fileID: 586143363}
   - {fileID: 1161790706}
   - {fileID: 772440488}
-  inflateRadius: .150000006
+  inflateRadius: .219999999
   masterCollider: {fileID: 704228980}
 --- !u!60 &704228980
 PolygonCollider2D:
@@ -757,6 +757,52 @@ PolygonCollider2D:
       - {x: 3.7243104, y: -3.63835716}
       - {x: -5.35724401, y: -3.63835669}
       - {x: -5.3324914, y: -3.32870531}
+--- !u!1 &783389628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 783389630}
+  - 114: {fileID: 783389629}
+  m_Layer: 0
+  m_Name: TimedSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &783389629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783389628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc1088ed8a0bcf489d1b33f37f47744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWait: 5
+  intervalBetween: 10
+  amountPerSpawn: 1
+  maxAlive: 2
+  totalAmount: 6
+  prefabs:
+  - {fileID: 100000, guid: 15513b3ca164a184d8001cc4af79c994, type: 2}
+--- !u!4 &783389630
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783389628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.16639996, y: -6.73169994, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1 &862530667
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +998,52 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .22590223, y: .0534067303}
   m_Center: {x: .00941777229, y: -.0298995972}
+--- !u!1 &1080654816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1080654818}
+  - 114: {fileID: 1080654817}
+  m_Layer: 0
+  m_Name: TimedSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1080654817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1080654816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc1088ed8a0bcf489d1b33f37f47744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWait: 5
+  intervalBetween: 10
+  amountPerSpawn: 1
+  maxAlive: 2
+  totalAmount: 6
+  prefabs:
+  - {fileID: 100000, guid: 15513b3ca164a184d8001cc4af79c994, type: 2}
+--- !u!4 &1080654818
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1080654816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.16639996, y: -1.6329, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &1161790704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,7 +1389,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91ec325167a50384886801d664d893a3, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91ec325167a50384886801d664d893a3, type: 2}
@@ -1457,6 +1549,10 @@ Prefab:
     - target: {fileID: 22500000, guid: 33289e2eee6e0254da18aefd85461555, type: 2}
       propertyPath: m_BlocksRaycasts
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400012, guid: 33289e2eee6e0254da18aefd85461555, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 186.429993
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33289e2eee6e0254da18aefd85461555, type: 2}
@@ -1692,7 +1788,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 265.529999}
+  m_AnchoredPosition: {x: 0, y: 186.429993}
   m_SizeDelta: {x: 130, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1472447066
@@ -2022,6 +2118,52 @@ Transform:
   - {fileID: 1172455085}
   m_Father: {fileID: 16411815}
   m_RootOrder: 0
+--- !u!1 &1656374510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1656374512}
+  - 114: {fileID: 1656374511}
+  m_Layer: 0
+  m_Name: TimedSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1656374511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1656374510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc1088ed8a0bcf489d1b33f37f47744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWait: 5
+  intervalBetween: 10
+  amountPerSpawn: 1
+  maxAlive: 2
+  totalAmount: 6
+  prefabs:
+  - {fileID: 100000, guid: 15513b3ca164a184d8001cc4af79c994, type: 2}
+--- !u!4 &1656374512
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1656374510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.7651, y: -1.6329, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &1802541974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,6 +2363,10 @@ Prefab:
     - target: {fileID: 400004, guid: c34d84b3a0177c04a9b2aeffd1486cf5, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: c34d84b3a0177c04a9b2aeffd1486cf5, type: 2}
+      propertyPath: inflateRadius
+      value: .219999999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c34d84b3a0177c04a9b2aeffd1486cf5, type: 2}

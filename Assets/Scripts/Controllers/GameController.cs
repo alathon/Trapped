@@ -7,6 +7,13 @@ public class GameController : MonoBehaviour {
     private GameState state;
 
     /// <summary>
+    /// Signalled when the phase changes.
+    /// </summary>
+    /// <param name="newPhase"></param>
+    public delegate void PhaseChangedHandler(Phase newPhase);
+    public event PhaseChangedHandler PhaseChanged;
+
+    /// <summary>
     /// Signalled when the amount of life changes.
     /// </summary>
     /// <param name="newLife"></param>
@@ -91,7 +98,8 @@ public class GameController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 100f);
+            int layerMask = 1 << LayerMask.NameToLayer("Clickables");
+            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 100f, layerMask);
             if (hit.collider == null) return;
 
             GameObject gObj = hit.collider.transform.gameObject;
@@ -107,8 +115,13 @@ public class GameController : MonoBehaviour {
     void ActionPhase_Start()
     {
         GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().ActivateGUI();
-        this.state.currentPhase = Phase.Action;
-        Instantiate(Resources.Load("TestEnemy"), new Vector3(4.62f, -3.755f, 0f), Quaternion.identity);
+        this.SetState(Phase.Action);
+    }
+
+    void SetState(Phase newPhase)
+    {
+        this.state.currentPhase = newPhase;
+        this.PhaseChanged(this.state.currentPhase);
     }
 
     void ActionPhase_TryEndPhase()
@@ -152,7 +165,7 @@ public class GameController : MonoBehaviour {
     void PlanningPhase_Start()
     {
         GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().ActivateGUI();
-        this.state.currentPhase = Phase.Planning;
+        this.SetState(Phase.Planning);
     }
 
     void PlanningPhase_Update()

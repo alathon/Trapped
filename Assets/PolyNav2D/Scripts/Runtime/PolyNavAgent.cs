@@ -30,7 +30,7 @@ public class PolyNavAgent : MonoBehaviour{
 	///The avoidance radius of the agent. 0 for no avoidance	
 	public float avoidRadius         = 0;
 
-	private float lookAhead           = 1;
+	public float lookAhead           = 1;
 	private Vector2 velocity          = Vector2.zero;
 	private float maxForce            = 100;
 	private int requests              = 0;
