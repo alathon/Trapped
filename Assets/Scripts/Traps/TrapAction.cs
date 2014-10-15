@@ -11,6 +11,8 @@ public class TrapAction : MonoBehaviour {
     [SerializeField]
     protected float duration = 1f;
 
+    protected bool inUse = false;
+
     public bool IsReuseable()
     {
         return reuseTime > 0;
@@ -18,6 +20,8 @@ public class TrapAction : MonoBehaviour {
 
     public virtual void Trigger()
     {
+        if (inUse) return;
+
         if (windupTime > 0)
         {
             StartCoroutine(Windup());
@@ -28,14 +32,36 @@ public class TrapAction : MonoBehaviour {
         }
     }
 
+    void Start()
+    {
+        this.SetTrapAlpha(0.5f);
+    }
+
     protected virtual IEnumerator Windup()
     {
+        this.inUse = true;
+        SendMessage("OnUseUpdate", this.inUse);
         yield return new WaitForSeconds(this.windupTime);
         yield return StartCoroutine(Action());
+    }
+
+    public void SetTrapAlpha(float a)
+    {
+        SpriteRenderer sRend = this.GetComponent<SpriteRenderer>();
+        Color c = sRend.color;
+        sRend.color = new Color(c.r, c.b, c.g, a);
+    }
+
+    protected virtual IEnumerator PostAction()
+    {
+        yield return new WaitForSeconds(this.reuseTime);
+        this.inUse = false;
+        SendMessage("OnUseUpdate", this.inUse);
     }
 
     protected virtual IEnumerator Action()
     {
         yield return new WaitForSeconds(this.duration);
+        yield return StartCoroutine(PostAction());
     }
 }

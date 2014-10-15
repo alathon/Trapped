@@ -5,12 +5,15 @@ public class TrapEffectOnHit : MonoBehaviour {
     [SerializeField]
     private int damage = 1;
 
+    [SerializeField]
+    private bool destroyOnHit = true;
+
     void OnTriggerEnter2D(Collider2D col)
     {
         GameObject target = col.transform.gameObject;
         if (target.layer == LayerMask.NameToLayer("Obstacles"))
         {
-            GameObject.Destroy(this.gameObject);
+            if(destroyOnHit) GameObject.Destroy(this.gameObject);
         }
         else if (target.tag.Equals("Enemy"))
         {
@@ -18,7 +21,7 @@ public class TrapEffectOnHit : MonoBehaviour {
             if (state != null)
             {
                 state.TakeDamage(this.damage);
-                GameObject.Destroy(this.gameObject);
+                if (destroyOnHit) GameObject.Destroy(this.gameObject);
             }
         }
         else if (target.tag.Equals("Hitbox"))
@@ -30,7 +33,7 @@ public class TrapEffectOnHit : MonoBehaviour {
                 if (state != null)
                 {
                     state.TakeDamage(this.damage);
-                    GameObject.Destroy(this.gameObject);
+                    if (destroyOnHit) GameObject.Destroy(this.gameObject);
                 }
             }
             

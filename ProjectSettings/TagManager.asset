@@ -13,6 +13,7 @@ TagManager:
   - ActionPhase_LifePanel
   - Enemy
   - Hitbox
+  - Trap
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

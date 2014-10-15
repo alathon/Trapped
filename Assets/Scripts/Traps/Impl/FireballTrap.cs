@@ -22,10 +22,9 @@ public class FireballTrap : TrapAction {
             yield return new WaitForSeconds(this.duration / this.fireballs);
         }
 
+        yield return StartCoroutine(PostAction());
         //GameObject pSystem = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
         //pSystem.transform.SetParent(this.transform);
         //pSystem.transform.RotateAroundLocal(Vector3.right, this.transform.rotation.z);
     }
-
-
 }

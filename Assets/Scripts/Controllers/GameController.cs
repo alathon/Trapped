@@ -119,6 +119,11 @@ public class GameController : MonoBehaviour {
         this.PhaseChanged(this.state.currentPhase);
     }
 
+    public Phase GetPhase()
+    {
+        return this.state.currentPhase;
+    }
+
     void Update()
     {
         if (this.state.currentPhase == Phase.Planning) PlanningPhase_Update();
@@ -132,21 +137,21 @@ public class GameController : MonoBehaviour {
     /// </summary>
     void ActionPhase_Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        int layerMask = 1 << LayerMask.NameToLayer("Clickables");
+        var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 100f, layerMask);
+        if (hit.collider == null) return;
+        GameObject gObj = hit.collider.transform.gameObject;
+
+        // Okay, we've hit a trap.
+        if (gObj.GetComponent<TrapMetadata>() != null)
         {
-            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            int layerMask = 1 << LayerMask.NameToLayer("Clickables");
-            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 100f, layerMask);
-            if (hit.collider == null) return;
-
-            GameObject gObj = hit.collider.transform.gameObject;
-
-            // Okay, we've hit a trap.
-            if (gObj.GetComponent<TrapMetadata>() != null)
+            if (Input.GetMouseButtonDown(0))
             {
                 gObj.GetComponent<TrapAction>().Trigger();
             }
         }
+
     }
 
     /// <summary>
@@ -270,6 +275,7 @@ public class GameController : MonoBehaviour {
     {
         if (this.state.CurrentPlacementPrefab != null) return;
         this.state.CurrentPlacementPrefab = trapPrefab;
+        trapPrefab.GetComponent<TrapAction>().SetTrapAlpha(1f);
     }
 
     void PlanningPhase_TryPlaceTrap()
@@ -293,6 +299,7 @@ public class GameController : MonoBehaviour {
         if (trapPrefab.GetComponent<ValidTrapPlacement>().IsValid)
         {
             trapPrefab.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Placed;
+            trapPrefab.GetComponent<TrapAction>().SetTrapAlpha(0.5f);
             this.state.CurrentPlacementPrefab = null;
             this.RemoveTraps(trapPrefab, 1);
         }
