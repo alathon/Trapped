@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reuseTime: 10
   windupTime: 1.5
-  duration: 2
+  duration: 1.5
   prefab: {fileID: 100000, guid: af5d9509eb2612a4ebcd1ca0fe50de2a, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
