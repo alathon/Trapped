@@ -12,11 +12,11 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400010}
-  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: TestRangedEnemy
+  m_Name: Melee Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.72914219, y: -6.43377447, z: 0}
+  m_LocalPosition: {x: 2.88228798, y: -3.14414668, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22400004}
@@ -175,15 +175,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85cfffec51ad2e249a99eb4398bf2240, type: 3}
+  m_Script: {fileID: 11500000, guid: e41abaaa35d9b7b488350b3cda831d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRangeMin: .5
-  attackRangeMax: 4
-  attackDamage: 3
-  attackSpeed: 3
-  windupSpeed: 1
-  projectilePrefab: {fileID: 100000, guid: 1189f45699e6a8945bd3102630f556d1, type: 2}
+  minAttackRange: 0
+  maxAttackRange: .349999994
+  forgetRange: 4
+  attackDamage: 1
+  attackSpeed: 1.5
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1
+  maxSpeed: 1.14999998
   mass: 25
   stoppingDistance: .25
   slowingDistance: 0
