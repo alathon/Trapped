@@ -381,7 +381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Spike Trap deals low damage, but stuns enemies momentarily.
+  m_Text: The Spike Trap deals low damage, but stuns enemies.
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1

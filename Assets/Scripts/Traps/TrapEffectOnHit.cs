@@ -12,7 +12,7 @@ public class TrapEffectOnHit : MonoBehaviour {
     [SerializeField]
     protected bool hitOnce = true;
 
-    private List<Collider2D> hits = new List<Collider2D>();
+    private List<GameObject> hits = new List<GameObject>();
 
     protected virtual void EffectState(UnitState state)
     {
@@ -29,8 +29,8 @@ public class TrapEffectOnHit : MonoBehaviour {
 
         if (hitOnce)
         {
-            if (hits.Contains(col)) return;
-            hits.Add(col);
+            if (hits.Contains(target)) return;
+            hits.Add(target);
         }
         
         if (target.layer == LayerMask.NameToLayer("Obstacles"))
