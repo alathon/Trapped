@@ -21,4 +21,11 @@ public class SpikeTrap : TrapAction {
         GameObject.Destroy(prefabInst);
         return base.PostAction();
     }
+
+    protected override void Reset()
+    {
+        GameObject.Destroy(prefabInst);
+        this.inUse = false;
+        this.StopAllCoroutines();
+    }
 }

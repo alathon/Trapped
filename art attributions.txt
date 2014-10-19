@@ -12,3 +12,14 @@ C. Bellanger - http://opengameart.org/content/quake-spell (Quake spell)
 C. Bellanger - http://opengameart.org/content/projectiles (Projectiles)
 C. Bellanger - http://opengameart.org/content/sparks-fire-ice-blood (Sparks)
 C. Bellanger - http://opengameart.org/content/icicle-spell (Icicle spell)
+
+DevNewton - http://opengameart.org/content/bomb (Bomb animation & std. image)
+qubodup - http://opengameart.org/content/bomb-explosion-animation (Bomb explosion animation)
+	Attribution:
+		Blood _ Copyright 2011 by shimobayashi <http://opengameart.org/content/teqq-princess-image-materials> 
+		Color edit to look like explosion Copyright 2012 by qubodup <http://opengameart.org/users/qubodup> 
+		License: CCBY3 or later <http://creativecommons.org/licenses/by/3.0/>
+		
+		
+Icon made by Freepik from www.flaticon.com is licensed under Creative Commons BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+http://www.flaticon.com/free-icon/mouse-left-button_32041

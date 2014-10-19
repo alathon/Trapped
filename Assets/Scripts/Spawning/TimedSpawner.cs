@@ -4,98 +4,46 @@ using System.Collections.Generic;
 using Assets.Scripts.Controllers;
 
 public class TimedSpawner : MonoBehaviour {
+    /// <summary>
+    /// Signalled when all of the spawners mobs are dead.
+    /// </summary>
+    public delegate void SpawnerDoneHandler(TimedSpawner spawner);
+    public event SpawnerDoneHandler SpawnerDone;
+
+    /// <summary>
+    /// Signalled when a mob is spawned
+    /// </summary>
+    public delegate void MobSpawnedHandler(GameObject mob);
+    public event MobSpawnedHandler MobSpawned;
+
     [SerializeField]
     private float startWait = 0f;
-    
-    [SerializeField]
-    private float intervalBetween = 0f;
-
-    [SerializeField]
-    private int amountPerSpawn = 0;
-
-    [SerializeField]
-    private int maxAlive = 0;
-
-    [SerializeField]
-    private int totalAmount = 0;
 
     [SerializeField]
     private GameObject[] prefabs;
 
-    private float timeCounter = 0f;
-    private List<GameObject> spawnedMobs = new List<GameObject>();
-    private GameController controller;
-    private bool shutdown = true;
-
-    void Start()
+    public void StartSpawning()
     {
-        this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        this.controller.PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChange);
+        StartCoroutine(Spawn());
     }
 
-    void OnPhaseChange(Phase newPhase)
+    public void OnMobDeath(GameObject mob)
     {
-        if (newPhase == Phase.Action)
+        if (this.SpawnerDone != null)
         {
-            this.shutdown = false;
-            StartCoroutine(Spawn());
+            this.SpawnerDone(this);
         }
-        else
-        {
-            this.shutdown = true;
-            this.RemoveMobs();
-        }
-    }
-
-    void OnMobDeath(GameObject mob)
-    {
-        if (this.spawnedMobs.Contains(mob))
-        {
-            this.spawnedMobs.Remove(mob);
-            GameObject.Destroy(mob);
-        }
-    }
-
-    void RemoveMobs()
-    {
-        foreach (var mob in this.spawnedMobs)
-        {
-            GameObject.Destroy(mob);
-        }
-        this.spawnedMobs = new List<GameObject>();
     }
 
     IEnumerator Spawn()
     {
         yield return new WaitForSeconds(startWait);
-        while (true)
+        GameObject prefab = this.prefabs[Random.Range(0, this.prefabs.Length - 1)];
+        GameObject mob = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
+        mob.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnMobDeath);
+        if (this.MobSpawned != null)
         {
-            if (this.shutdown)
-            {
-                yield break;
-            }
-
-            int diff = Mathf.Min(maxAlive - spawnedMobs.Count, this.totalAmount);
-            if (timeCounter++ >= intervalBetween && diff > 0)
-            {
-                for (int i = 0; i < Mathf.Min(diff, amountPerSpawn); i++)
-                {
-                    GameObject prefab = this.prefabs[Random.Range(0, this.prefabs.Length - 1)];
-                    GameObject mob = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
-                    this.spawnedMobs.Add(mob);
-                    mob.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnMobDeath);
-                    this.totalAmount--;
-                }
-
-                if (this.totalAmount <= 0)
-                {
-                    yield break;
-                }
-
-                timeCounter = 0f;
-            }
-
-            yield return new WaitForSeconds(0.5f);
+            this.MobSpawned(mob);
         }
     }
 }

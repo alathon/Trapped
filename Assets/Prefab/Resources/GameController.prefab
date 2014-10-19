@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -66,6 +67,23 @@ MonoBehaviour:
   prefabs:
   - {fileID: 100000, guid: 9a05e7729f3a7124788dfef385155256, type: 2}
   - {fileID: 100000, guid: 31742693e36b3ac45b9d0cdf4df22ae9, type: 2}
+  - {fileID: 100004, guid: 752378489a65b4e4589aa1e8d67e4749, type: 2}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382ebf848343f0b4793f2efafeaf3c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planningPhasePrefab: {fileID: 100020, guid: 97631036c8e4c1548a1da637dcb47c7d, type: 2}
+  actionPhasePrefab: {fileID: 0}
+  bombTrapPrefab: {fileID: 100002, guid: c3a4390ad7c313a4c988dfce62ddf043, type: 2}
+  spikeTrapPrefab: {fileID: 100002, guid: ef35e1c9327509e44a5d415c6d1a2344, type: 2}
+  fireballTrapPrefab: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

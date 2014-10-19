@@ -7,11 +7,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public void StartGame()
     {
-        if (!GameObject.FindGameObjectWithTag("GameController"))
-        {
-            Instantiate(gameControllerPrefab);
-        }
-        Application.LoadLevel("Test");
+        Application.LoadLevel("1");
     }
 
     public void About()

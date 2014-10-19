@@ -14,6 +14,31 @@ public class UnitState : MonoBehaviour {
     [SerializeField]
     private int maximumLife = 8;
 
+    private bool isStunned = false;
+
+    public bool Stunned
+    {
+        get
+        {
+            return this.isStunned;
+        }
+    }
+
+    /// <summary>
+    /// This is a pretty bad implementation that can't handle multiple overlapping stuns ;)
+    /// </summary>
+    private IEnumerator Stun(float duration)
+    {
+        this.isStunned = true;
+        yield return new WaitForSeconds(duration);
+        this.isStunned = false;
+    }
+
+    public void StunMe(float duration)
+    {
+        StartCoroutine(Stun(duration));
+    }
+
     [SerializeField]
     private string hpBarPath = "HP Bar/Background/Fill";
 
@@ -48,7 +73,6 @@ public class UnitState : MonoBehaviour {
             {
                 this.hpBarRect.localScale = new Vector3((float)this.currentLife / (float)this.maximumLife,
                     this.hpBarRect.localScale.y, this.hpBarRect.localScale.z);
-
             }
         }
     }

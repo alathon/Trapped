@@ -12,6 +12,11 @@ public class FollowingCamera : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     [SerializeField] Transform target;
 
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
+
     // Update is called once per frame
     void LateUpdate () 
     {

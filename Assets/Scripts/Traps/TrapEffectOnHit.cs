@@ -3,10 +3,15 @@ using System.Collections;
 
 public class TrapEffectOnHit : MonoBehaviour {
     [SerializeField]
-    private int damage = 1;
+    protected int damage = 1;
 
     [SerializeField]
-    private bool destroyOnHit = true;
+    protected bool destroyOnHit = true;
+
+    protected virtual void EffectState(UnitState state)
+    {
+        state.TakeDamage(this.damage);
+    }
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -20,7 +25,7 @@ public class TrapEffectOnHit : MonoBehaviour {
             UnitState state = target.GetComponent<UnitState>();
             if (state != null)
             {
-                state.TakeDamage(this.damage);
+                this.EffectState(state);
                 if (destroyOnHit) GameObject.Destroy(this.gameObject);
             }
         }
@@ -32,7 +37,7 @@ public class TrapEffectOnHit : MonoBehaviour {
                 UnitState state = tParent.GetComponent<UnitState>();
                 if (state != null)
                 {
-                    state.TakeDamage(this.damage);
+                    this.EffectState(state);
                     if (destroyOnHit) GameObject.Destroy(this.gameObject);
                 }
             }

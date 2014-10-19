@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Controllers;
 
 public class TrapAction : MonoBehaviour {
     [SerializeField]
@@ -35,8 +36,18 @@ public class TrapAction : MonoBehaviour {
     void Start()
     {
         this.SetTrapAlpha(0.5f);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChange);
     }
 
+    public void OnPhaseChange(Phase newPhase)
+    {
+        this.Reset();
+    }
+
+    protected virtual void Reset()
+    {
+
+    }
     protected virtual IEnumerator Windup()
     {
         this.inUse = true;

@@ -19,29 +19,26 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     /// </summary>
     private GameObject trapPanel;
     private GameObject planningPhaseGUI;
-    private CanvasGroup canvasGroup;
 
     void Start()
     {
-        this.planningPhaseGUI = GameObject.FindGameObjectWithTag("PlanningPhase_GUI");
         this.trapPanel = GameObject.FindGameObjectWithTag("PlanningPhase_TrapsPanel");
         this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         this.controller.TrapCountChanged += new GameController.TrapCountChangedHandler(OnTrapCountChanged);
-        this.canvasGroup = this.planningPhaseGUI.GetComponent<CanvasGroup>();
     }
 
     public void ActivateGUI()
     {
-        canvasGroup.alpha = 1f;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
+        this.GetComponent<CanvasGroup>().alpha = 1f;
+        this.GetComponent<CanvasGroup>().interactable = true;
+        this.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
     public void DeactivateGUI()
     {
-        canvasGroup.alpha = 0f;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
+        this.GetComponent<CanvasGroup>().alpha = 0f;
+        this.GetComponent<CanvasGroup>().interactable = false;
+        this.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnClickEndPhaseBtn()

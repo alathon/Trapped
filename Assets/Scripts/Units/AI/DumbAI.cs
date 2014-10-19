@@ -51,6 +51,12 @@ public class DumbAI : AI {
             return;
         }
 
+        if (this.GetComponent<UnitState>().Stunned)
+        {
+            this.agent.Stop();
+            return;
+        }
+
         float dist = Vector2.Distance(this.transform.position, this.player.transform.position);
         if (dist > this.attackRange)
         {
@@ -108,6 +114,12 @@ public class DumbAI : AI {
     }
 
 	void LateUpdate () {
+        if (this.GetComponent<UnitState>().Stunned)
+        {
+            this.agent.Stop();
+            return;
+        }
+
         // Animation. This should be elsewhere, really, in a different component!!
         if (this.agent.hasPath)
         {

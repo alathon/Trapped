@@ -15,11 +15,24 @@ public class GameController : MonoBehaviour {
     public event PhaseChangedHandler PhaseChanged;
 
     /// <summary>
+    /// Signalled when the wave changes.
+    /// </summary>
+    /// <param name="newWave"></param>
+    public delegate void WaveChangedHandler(int newWave);
+    public event WaveChangedHandler WaveChanged;
+
+    /// <summary>
     /// Signalled when the amount of player resources available changes.
     /// </summary>
     /// <param name="newCount"></param>
     public delegate void ResourceChangedHandler(int newCount);
     public event ResourceChangedHandler ResourceChanged;
+
+    /// <summary>
+    /// Signalled when the player has placed all traps.
+    /// </summary>
+    public delegate void OutOfTrapsHandler();
+    public event OutOfTrapsHandler OutOfTraps;
 
     /// <summary>
     /// Signalled when the amount of unplaced traps changes.
@@ -33,43 +46,163 @@ public class GameController : MonoBehaviour {
     public delegate void TrapCountChangedHandler(TrapMetadata metadata, int newTotal);
     public event TrapCountChangedHandler TrapCountChanged;
 
-    void Awake()
+    IEnumerator OnLevelWasLoaded(int lvl)
     {
-        this.player = GameObject.FindGameObjectWithTag("Player");
-        this.player.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnPlayerDeath);
-        this.trapPrefabsManager = this.GetComponent<TrapPrefabsManager>();
-        state = new GameState();
-        Invoke("SetupDummyState", 0.5f);
+        if (this.player == null)
+        {
+            this.player = GameObject.FindGameObjectWithTag("Player");
+            this.player.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnPlayerDeath);
+        }
+
+        if (this.trapPrefabsManager == null)
+        {
+            this.trapPrefabsManager = this.GetComponent<TrapPrefabsManager>();
+        }
+
+        if (this.state == null)
+        {
+            state = new GameState();
+            Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
+            this.state.maxWave = waveParent.childCount;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (Application.loadedLevelName.Equals("1"))
+        {
+            foreach (GameObject trapPrefab in this.trapPrefabsManager.prefabs)
+            {
+                if (trapPrefab.name.Equals("Bomb Trap")) this.AddTraps(trapPrefab, 5);
+                else Debug.Log("Not correct prefab: " + trapPrefab);
+            }
+            this.GetComponent<TutorialController>().ShowPlanningPhaseTutorial();
+        }
+        this.SetState(Phase.Planning);
+    }
+
+    void SetLevel(int level)
+    {
+        // Reset spawners / Phase / Wave.
+        this.state.spawnersLeft = 0;
+        Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
+        this.state.maxWave = waveParent.childCount;
+        this.SetState(Phase.Planning);
+        this.SetWave(1);
+
+        // Change level.
+        this.state.currentLevel = level;
+        Application.LoadLevel(level.ToString());
+    }
+
+    // TODO:
+    void CompleteGame()
+    {
+        
+    }
+    /// <summary>
+    /// Changes the current wave and triggers appropriate event.
+    /// </summary>
+    /// <param name="wave">
+    /// New wave number.
+    /// </param>
+    void SetWave(int wave)
+    {
+        this.state.currentWave = wave;
+        if (this.WaveChanged != null)
+        {
+            WaveChanged(wave);
+        }
+    }
+
+    /// <summary>
+    /// Changes the state of the game and triggers an event for it.
+    /// </summary>
+    /// <param name="newPhase">
+    /// The phase to enter into.
+    /// </param>
+    void SetState(Phase newPhase)
+    {
+        this.state.currentPhase = newPhase;
+        if (this.PhaseChanged != null)
+        {
+            this.PhaseChanged(this.state.currentPhase);
+        }
+
+        if (newPhase == Phase.Action)
+        {
+            PlanningPhase_End();
+            ActionPhase_Start();
+        }
+        else
+        {
+            ActionPhase_End();
+            PlanningPhase_Start();
+        }
+    }
+
+    IEnumerator NextWave()
+    {
+        // Level complete.
+        if (this.state.maxWave == this.state.currentWave)
+        {
+            // Game complete.
+            if (this.state.currentLevel == this.state.maxLevel)
+            {
+                this.CompleteGame();
+            }
+            else
+            {
+                this.SetLevel(this.state.currentLevel + 1);
+            }
+        }
+        else // Load next wave.
+        {
+            GameObject txt = (GameObject)Instantiate(Resources.Load("Invaders defeated text"));
+            txt.transform.SetParent(GameObject.FindGameObjectWithTag("MainCanvas").transform);
+            yield return new WaitForSeconds(3.5f); // Oh god the horror! Magic number to match with animation length + extra.. Eghhhh!
+            GameObject.Destroy(txt);
+            this.SetState(Phase.Planning);
+            this.SetWave(this.state.currentWave + 1);
+        }
+    }
+
+    public void OnSpawnerDone(TimedSpawner spawner)
+    {
+        
+        this.state.spawnersLeft -= 1;
+        // Wave complete. No spawners left.
+        if (this.state.spawnersLeft == 0)
+        {
+            StartCoroutine(this.NextWave());
+        }
+    }
+
+    public void OnMobSpawned(GameObject mob)
+    {
+        mob.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnMobDeath);
+    }
+
+    public void OnMobDeath(GameObject mob)
+    {
+        this.GainMana(Random.Range(350, 700) * Application.loadedLevel);
+        GameObject.Destroy(mob);
+    }
+
+    void GainMana(int amount)
+    {
+        this.state.mana += amount;
+        if (this.ResourceChanged != null)
+        {
+            this.ResourceChanged(this.state.mana);
+        }
     }
 
     public void OnPlayerDeath(GameObject gObj)
     {
-        // TODO: Stuff happening on death.
+        this.SetLevel(Application.loadedLevel);
     }
 
-    /// <summary>
-    /// Used by e.g. LifeManager to know how much life is the maximum.
-    /// </summary>
-    /// <returns>
-    /// Total amount of life (should be divisible by 2!).
-    /// </returns>
-    public int GetLifeMax()
-    {
-        return this.state.lifeMax;
-    }
 
-    /// <summary>
-    /// Dummy state for test level (5 of each trap type).
-    /// </summary>
-    private void SetupDummyState()
-    {
-        this.PlanningPhase_Start();
-        // Add 5 of every trap.
-        foreach (GameObject trapPrefab in this.trapPrefabsManager.prefabs)
-        {
-            this.AddTraps(trapPrefab, 5);
-        }
-    }
 
     /// <summary>
     /// Removes a certain number of a kind of trap.
@@ -87,6 +220,14 @@ public class GameController : MonoBehaviour {
         {
             TrapCountChanged(meta, this.state.RemoveTraps(meta.trapName, count));
         }
+
+        if (this.state.OutOfTrapsToPlace())
+        {
+            if (this.OutOfTraps != null)
+            {
+                this.OutOfTraps();
+            }
+        }
     }
 
     /// <summary>
@@ -101,23 +242,19 @@ public class GameController : MonoBehaviour {
     void AddTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
+        int newCount = this.state.AddTraps(meta.trapName, count);
+        if (newCount == count)
+        {
+            this.GetComponent<TutorialController>().FirstTimeTrap(gObj);
+        }
+
         if (TrapCountChanged != null)
         {
-            TrapCountChanged(meta, this.state.AddTraps(meta.trapName, count));
+            TrapCountChanged(meta, newCount);
         }   
     }
 
-    /// <summary>
-    /// Changes the state of the game and triggers an event for it.
-    /// </summary>
-    /// <param name="newPhase">
-    /// The phase to enter into.
-    /// </param>
-    void SetState(Phase newPhase)
-    {
-        this.state.currentPhase = newPhase;
-        this.PhaseChanged(this.state.currentPhase);
-    }
+
 
     public Phase GetPhase()
     {
@@ -160,17 +297,28 @@ public class GameController : MonoBehaviour {
     /// </summary>
     void ActionPhase_Start()
     {
+        Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
+        Transform waveObj = waveParent.transform.Find(this.state.currentWave.ToString() + "/Spawners");
+        foreach (Transform child in waveObj)
+        {
+            this.state.spawnersLeft++;
+            TimedSpawner spawner = child.GetComponent<TimedSpawner>();
+            spawner.MobSpawned += new TimedSpawner.MobSpawnedHandler(OnMobSpawned);
+            spawner.SpawnerDone += new TimedSpawner.SpawnerDoneHandler(OnSpawnerDone);
+            spawner.StartSpawning();
+        }
+
         GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().ActivateGUI();
-        this.SetState(Phase.Action);
     }
 
 
     /// <summary>
     /// Called when the action phase should end. Hides the action phase canvas.
     /// </summary>
-    void ActionPhase_TryEndPhase()
+    void ActionPhase_End()
     {
         GameObject.FindGameObjectWithTag("ActionPhase_GUI").GetComponent<ActionPhaseUIManager>().DeactivateGUI();
+
     }
 
     // PLANNING PHASE
@@ -198,23 +346,20 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void PlanningPhase_OnClickEndPhaseBtn()
     {
-        this.PlanningPhase_TryEndPhase();
-        this.ActionPhase_Start();
+        this.SetState(Phase.Action);
     }
 
     /// <summary>
     /// Ends the planning phase, hiding the planning phase canvas.
     /// </summary>
-    void PlanningPhase_TryEndPhase()
+    void PlanningPhase_End()
     {
-        // TODO: Any criterion for ending the phase???
         GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().DeactivateGUI();
     }
 
     void PlanningPhase_Start()
     {
         GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().ActivateGUI();
-        this.SetState(Phase.Planning);
     }
 
     /// <summary>
@@ -283,12 +428,19 @@ public class GameController : MonoBehaviour {
         GameObject trapPrefab = this.state.CurrentPlacementPrefab;
         if (trapPrefab.GetComponent<ValidTrapPlacement>().IsValid)
         {
-            trapPrefab.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Angling;
+            if (trapPrefab.GetComponent<TrapMetadata>().isDirectional)
+            {
+                trapPrefab.GetComponent<FollowMouse>().state = FollowMouse.PlacementState.Angling;
+            }
+            else
+            {
+                this.PlanningPhase_TryFinalizeTrapPosition();
+            }
         }
         else
         {
             // TODO: Play a 'bad' sound or somesuch.
-            Debug.Log("Not valid!!");
+            Debug.Log("Not valid!! TODO: Play bad placement sound.");
         }
     }
 

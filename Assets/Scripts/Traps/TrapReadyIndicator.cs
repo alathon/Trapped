@@ -18,9 +18,13 @@ public class TrapReadyIndicator : MonoBehaviour {
 
     public void OnPhaseChange(Phase newPhase)
     {
-        if (this.isActive && newPhase == Phase.Planning)
+        if (newPhase == Phase.Planning)
         {
             this.HideReadyIndicator();
+        }
+        else if (newPhase == Phase.Action)
+        {
+            this.OnUseUpdate(false);
         }
 
         this.isActive = newPhase == Phase.Action;
@@ -28,6 +32,8 @@ public class TrapReadyIndicator : MonoBehaviour {
 
     public void OnUseUpdate(bool inUse)
     {
+        if (!isActive) return;
+
         if (inUse)
         {
             circleImage.color = new Color(255, 0, 0, circleImage.color.a);
