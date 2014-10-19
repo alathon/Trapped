@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour {
     /// <param name="newTotal">
     /// The new amount of traps available.
     /// </param>
-    public delegate void TrapCountChangedHandler(TrapMetadata metadata, int newTotal);
+    public delegate void TrapCountChangedHandler(TrapMetadata metadata, int change, int newTotal);
     public event TrapCountChangedHandler TrapCountChanged;
 
     IEnumerator OnLevelWasLoaded(int lvl)
@@ -62,33 +62,19 @@ public class GameController : MonoBehaviour {
         if (this.state == null)
         {
             state = new GameState();
-            Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
-            this.state.maxWave = waveParent.childCount;
         }
 
         yield return new WaitForSeconds(0.1f);
 
-        if (Application.loadedLevelName.Equals("1"))
-        {
-            foreach (GameObject trapPrefab in this.trapPrefabsManager.prefabs)
-            {
-                if (trapPrefab.name.Equals("Bomb Trap")) this.AddTraps(trapPrefab, 5);
-                else Debug.Log("Not correct prefab: " + trapPrefab);
-            }
-            this.GetComponent<TutorialController>().ShowPlanningPhaseTutorial();
-        }
         this.SetState(Phase.Planning);
+        this.state.spawnersLeft = 0;
+        Transform waves = GameObject.FindGameObjectWithTag("Waves").transform;
+        this.state.maxWave = waves.childCount;
+        this.SetWave(1);
     }
 
     void SetLevel(int level)
     {
-        // Reset spawners / Phase / Wave.
-        this.state.spawnersLeft = 0;
-        Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
-        this.state.maxWave = waveParent.childCount;
-        this.SetState(Phase.Planning);
-        this.SetWave(1);
-
         // Change level.
         this.state.currentLevel = level;
         Application.LoadLevel(level.ToString());
@@ -213,19 +199,20 @@ public class GameController : MonoBehaviour {
     /// <param name="count">
     /// The amount of traps to remove.
     /// </param>
-    void RemoveTraps(GameObject gObj, int count)
+    public void RemoveTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
+        int newCount = this.state.RemoveTraps(meta.trapName, count);
         if (TrapCountChanged != null)
         {
-            TrapCountChanged(meta, this.state.RemoveTraps(meta.trapName, count));
-        }
+            TrapCountChanged(meta, count, newCount);
+        }  
 
         if (this.state.OutOfTrapsToPlace())
         {
-            if (this.OutOfTraps != null)
+            if (OutOfTraps != null)
             {
-                this.OutOfTraps();
+                OutOfTraps();
             }
         }
     }
@@ -239,18 +226,13 @@ public class GameController : MonoBehaviour {
     /// <param name="count">
     /// The amount of traps to add.
     /// </param>
-    void AddTraps(GameObject gObj, int count)
+    public void AddTraps(GameObject gObj, int count)
     {
         TrapMetadata meta = gObj.GetComponent<TrapMetadata>();
         int newCount = this.state.AddTraps(meta.trapName, count);
-        if (newCount == count)
-        {
-            this.GetComponent<TutorialController>().FirstTimeTrap(gObj);
-        }
-
         if (TrapCountChanged != null)
         {
-            TrapCountChanged(meta, newCount);
+            TrapCountChanged(meta, count, newCount);
         }   
     }
 

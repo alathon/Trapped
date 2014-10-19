@@ -11,7 +11,7 @@ public class SpikeTrap : TrapAction {
     {
         prefabInst = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
         prefabInst.transform.SetParent(this.transform);
-        prefabInst.transform.RotateAroundLocal(Vector3.right, this.transform.rotation.z);
+        //prefabInst.transform.RotateAroundLocal(Vector3.right, this.transform.rotation.z);
         yield return new WaitForSeconds(this.duration);
         yield return StartCoroutine(PostAction());
     }

@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca543bc68d83464ab7a7111ca192111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapName: Test Trap
+  trapName: Spike Trap
   canPlaceInWall: 1
   isDirectional: 0
   placementSprite: {fileID: 21300000, guid: 4dbb0132cda828a4e809ab703aee52ce, type: 3}

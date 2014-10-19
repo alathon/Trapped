@@ -66,7 +66,7 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     /// <param name="newCount">
     /// The amount of traps.
     /// </param>
-    public void OnTrapCountChanged(TrapMetadata metadata, int newCount)
+    public void OnTrapCountChanged(TrapMetadata metadata, int added, int newCount)
     {
         string trapName = metadata.trapName;
         if (newCount > 0)

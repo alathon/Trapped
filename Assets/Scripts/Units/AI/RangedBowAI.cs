@@ -24,13 +24,7 @@ public class RangedBowAI : AI {
 	}
 
     [SerializeField]
-    private float attackRangeMin = 0.5f;
-
-    [SerializeField]
     private float attackRangeMax = 4f;
-
-    [SerializeField]
-    private int attackDamage = 3;
 
     [SerializeField]
     private float attackSpeed = 3f;
