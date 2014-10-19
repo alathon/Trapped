@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TrapEffectOnHit : MonoBehaviour {
     [SerializeField]
@@ -8,6 +9,11 @@ public class TrapEffectOnHit : MonoBehaviour {
     [SerializeField]
     protected bool destroyOnHit = true;
 
+    [SerializeField]
+    protected bool hitOnce = true;
+
+    private List<Collider2D> hits = new List<Collider2D>();
+
     protected virtual void EffectState(UnitState state)
     {
         state.TakeDamage(this.damage);
@@ -15,6 +21,12 @@ public class TrapEffectOnHit : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (hitOnce)
+        {
+            if (hits.Contains(col)) return;
+            hits.Add(col);
+        }
+
         GameObject target = col.transform.gameObject;
         if (target.layer == LayerMask.NameToLayer("Obstacles"))
         {
