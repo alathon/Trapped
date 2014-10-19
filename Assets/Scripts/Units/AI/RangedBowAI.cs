@@ -84,7 +84,8 @@ public class RangedBowAI : AI {
                 RaycastHit2D[] hits = new RaycastHit2D[5];
                 int layerMask = (1 << LayerMask.NameToLayer("Obstacles"));
 
-                float distFromCenter = 0.16f;
+                
+                float distFromCenter = 0.08f;
                 Vector2 enemyToPlayerDir = this.player.transform.position - this.transform.position;
                 Vector2[] locations = new Vector2[3];
                 locations[0] = new Vector2(this.transform.position.x - (Mathf.Sign(enemyToPlayerDir.x) * distFromCenter), this.transform.position.y + Mathf.Sign(enemyToPlayerDir.y) * distFromCenter);
@@ -94,13 +95,14 @@ public class RangedBowAI : AI {
                 bool blocked = false;
                 for (int i = 0; i < 3; i++)
                 {
-                    Color lineClr;
-                    if(i == 0) lineClr = Color.red;
-                    else if(i == 1) lineClr = Color.green;
-                    else lineClr = Color.blue;
-
                     Vector2 spot = locations[i];
-                    Debug.DrawLine(spot, this.player.transform.position, lineClr, 1f);
+
+                    //Color lineClr;
+                    //if(i == 0) lineClr = Color.red;
+                    //else if(i == 1) lineClr = Color.green;
+                    //else lineClr = Color.blue;
+                    //Debug.DrawLine(spot, this.player.transform.position, lineClr, 1f);
+
                     int hitCount = Physics2D.LinecastNonAlloc(spot, this.player.transform.position, hits, layerMask);
                     if (hitCount > 0)
                     {
@@ -130,12 +132,17 @@ public class RangedBowAI : AI {
     {
         this.attackState = AttackState.Attack;
         yield return new WaitForSeconds(this.windupSpeed);
+
+        var dir = this.player.transform.position - this.transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        dir.Normalize();
+
         GameObject projectile = (GameObject)Instantiate(this.projectilePrefab, new Vector3(-100, -100), Quaternion.identity);
         projectile.GetComponent<ProjectileEffect>().SetFiredByPlayer(false);
         projectile.transform.position = this.transform.position;
-        Vector2 dir = this.player.transform.position - this.transform.position;
-        dir.Normalize();
-        projectile.GetComponent<Rigidbody2D>().velocity = dir * 2f;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        projectile.GetComponent<Rigidbody2D>().velocity = dir * 7.5f;
+
         this.attackState = AttackState.Recharge;
         yield return new WaitForSeconds(this.attackSpeed);
         this.attackState = AttackState.Available;
