@@ -116,6 +116,7 @@ MonoBehaviour:
   placementSprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
   ingameSprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
   menuSprite: {fileID: 21301348, guid: 037630ddf753c7e438e7fd84b140a4f4, type: 3}
+  placementSound: {fileID: 8300000, guid: df5c03c04ba0aff4fa860a4701af60f0, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca76f0aad57f2c40bce5a5d30f01272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionClip: {fileID: 0}
+  windupClip: {fileID: 0}
   reuseTime: 10
   windupTime: 1
   duration: 1.5

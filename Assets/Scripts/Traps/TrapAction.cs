@@ -4,6 +4,12 @@ using Assets.Scripts.Controllers;
 
 public class TrapAction : MonoBehaviour {
     [SerializeField]
+    protected AudioClip actionClip;
+
+    [SerializeField]
+    protected AudioClip windupClip;
+
+    [SerializeField]
     protected float reuseTime = 0f;
 
     [SerializeField]
@@ -13,6 +19,7 @@ public class TrapAction : MonoBehaviour {
     protected float duration = 1f;
 
     protected bool inUse = false;
+    protected GameController controller;
 
     public bool IsReuseable()
     {
@@ -36,7 +43,8 @@ public class TrapAction : MonoBehaviour {
     void Start()
     {
         this.SetTrapAlpha(0.5f);
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChange);
+        this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        this.controller.PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChange);
     }
 
     public void OnPhaseChange(Phase newPhase)
@@ -52,6 +60,11 @@ public class TrapAction : MonoBehaviour {
     {
         this.inUse = true;
         SendMessage("OnUseUpdate", this.inUse);
+        if (this.windupClip != null)
+        {
+            this.controller.GetComponent<AudioController>().PlaySFX(this.windupClip);
+        }
+
         yield return new WaitForSeconds(this.windupTime);
         yield return StartCoroutine(Action());
     }

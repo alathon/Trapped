@@ -23,3 +23,5 @@ qubodup - http://opengameart.org/content/bomb-explosion-animation (Bomb explosio
 		
 Icon made by Freepik from www.flaticon.com is licensed under Creative Commons BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
 http://www.flaticon.com/free-icon/mouse-left-button_32041
+
+WASD image - Courtesey of http://inventwithpython.com/pygame/chapter4.html

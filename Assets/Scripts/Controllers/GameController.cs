@@ -46,6 +46,11 @@ public class GameController : MonoBehaviour {
     public delegate void TrapCountChangedHandler(TrapMetadata metadata, int change, int newTotal);
     public event TrapCountChangedHandler TrapCountChanged;
 
+    void Start()
+    {
+        this.GetComponent<AudioController>().PlayIngameBackgroundClip();
+    }
+
     IEnumerator OnLevelWasLoaded(int lvl)
     {
         if (this.player == null)
@@ -436,6 +441,7 @@ public class GameController : MonoBehaviour {
             trapPrefab.GetComponent<TrapAction>().SetTrapAlpha(0.5f);
             this.state.CurrentPlacementPrefab = null;
             this.RemoveTraps(trapPrefab, 1);
+            this.GetComponent<AudioController>().PlaySFX(trapPrefab.GetComponent<TrapMetadata>().placementSound);
         }
         else
         {

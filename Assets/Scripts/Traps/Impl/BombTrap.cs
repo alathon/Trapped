@@ -11,6 +11,7 @@ public class BombTrap : TrapAction {
     {
         prefabInst = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
         prefabInst.transform.SetParent(this.transform);
+        this.controller.GetComponent<AudioController>().PlaySFX(this.actionClip);
         yield return new WaitForSeconds(this.duration);
         yield return StartCoroutine(PostAction());
     }

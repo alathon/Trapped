@@ -8,4 +8,5 @@ public class TrapMetadata : MonoBehaviour {
     public Sprite placementSprite;
     public Sprite ingameSprite;
     public Sprite menuSprite;
+    public AudioClip placementSound;
 }
