@@ -87,7 +87,7 @@ public class TutorialController : MonoBehaviour {
 
     IEnumerator ShowPlanningPhaseTutorial()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         GameObject gObj = (GameObject)Instantiate(planningPhasePrefab);
         gObj.transform.SetParent(GameObject.FindGameObjectWithTag("MainCanvas").transform);
         gObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
