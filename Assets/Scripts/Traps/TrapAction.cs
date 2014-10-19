@@ -54,8 +54,11 @@ public class TrapAction : MonoBehaviour {
 
     protected virtual void Reset()
     {
-
+        this.inUse = false;
+        this.StopAllCoroutines();
+        this.SendMessage("OnUseUpdate", this.inUse);
     }
+
     protected virtual IEnumerator Windup()
     {
         this.inUse = true;

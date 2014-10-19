@@ -12,60 +12,50 @@ public class TrapReadyIndicator : MonoBehaviour {
     void Start()
     {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        controller.PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChange);
+        controller.PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChanged);
         circleImage = this.transform.Find("ReadyIndicatorCanvas/ReadyIndicator").GetComponent<Image>();
+        circleImage.color = new Color(0, 255, 0, 1f);
     }
 
-    public void OnPhaseChange(Phase newPhase)
+    public void OnPhaseChanged(Phase newPhase)
     {
-        if (newPhase == Phase.Planning)
-        {
-            this.HideReadyIndicator();
-        }
-        else if (newPhase == Phase.Action)
-        {
-            this.OnUseUpdate(false);
-        }
-
-        this.isActive = newPhase == Phase.Action;
+        //this.OnUseUpdate(false);
     }
 
     public void OnUseUpdate(bool inUse)
     {
-        if (!isActive) return;
-
         if (inUse)
         {
-            circleImage.color = new Color(255, 0, 0, circleImage.color.a);
+            circleImage.color = new Color(255, 0, 0, 1f);
         }
         else
         {
-            circleImage.color = new Color(0, 255, 0, circleImage.color.a);
+            circleImage.color = new Color(0, 255, 0, 1f);
         }
     }
 
-    void OnMouseEnter()
-    {
-        if (this.isActive)
-        {
-            this.ShowReadyIndicator();
-        }
-    }
+    //void OnMouseEnter()
+    //{
+    //    if (this.controller.GetPhase() == Phase.Action)
+    //    {
+    //        this.ShowReadyIndicator();
+    //    }
+    //}
 
-    void OnMouseExit()
-    {
-        this.HideReadyIndicator();
-    }
+    //void OnMouseExit()
+    //{
+    //    this.HideReadyIndicator();
+    //}
 
-    void ShowReadyIndicator()
-    {
-        Color prev = circleImage.color;
-        circleImage.color = new Color(prev.r, prev.g, prev.b, 1f);
-    }
+    //void ShowReadyIndicator()
+    //{
+    //    Color prev = circleImage.color;
+    //    circleImage.color = new Color(prev.r, prev.g, prev.b, 1f);
+    //}
 
-    void HideReadyIndicator()
-    {
-        Color prev = circleImage.color;
-        circleImage.color = new Color(prev.r, prev.g, prev.b, 0f);
-    }
+    //void HideReadyIndicator()
+    //{
+    //    Color prev = circleImage.color;
+    //    circleImage.color = new Color(prev.r, prev.g, prev.b, 1f);
+    //}
 }

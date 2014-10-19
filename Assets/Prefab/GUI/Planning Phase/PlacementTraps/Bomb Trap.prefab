@@ -10,6 +10,7 @@ GameObject:
   - 224: {fileID: 22400000}
   - 222: {fileID: 22200000}
   - 114: {fileID: 11400000}
+  - 95: {fileID: 9500000}
   m_Layer: 10
   m_Name: ReadyIndicator
   m_TagString: Untagged
@@ -64,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.70360005, y: -2.7644999, z: 0}
+  m_LocalPosition: {x: 1.47588599, y: -4.3105073, z: 0}
   m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
   m_Children:
   - {fileID: 22400002}
@@ -81,14 +82,25 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_Poly:
     m_Paths:
-    - - {x: -.0814457238, y: .143688619}
-      - {x: -.155850649, y: .0360226631}
-      - {x: -.153295845, y: -.076096952}
-      - {x: -.0628389418, y: -.154036283}
-      - {x: .0485810637, y: -.156133771}
-      - {x: .137757212, y: -.101825893}
-      - {x: .153683722, y: -.0335708261}
-      - {x: .159999996, y: .159999996}
+    - - {x: -.333488137, y: .4084602}
+      - {x: -.331507772, y: -.353597999}
+      - {x: .333790183, y: -.353868008}
+      - {x: .335665941, y: .409496129}
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 292ddf69c5dc5d84da4b762d61096a77, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_Color: {r: 0, g: 1, b: 0, a: 1}
-  m_Sprite: {fileID: 21300000, guid: afd1be8a73262954e95c0b012864b9f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ebc11bdcce9923c4395b8ef918969fd7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -202,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionClip: {fileID: 8300000, guid: 3e5e28185437e74428797721dc397f67, type: 3}
-  windupClip: {fileID: 0}
+  windupClip: {fileID: 8300000, guid: 740fa9336999d534d889db929036aee9, type: 3}
   reuseTime: 10
   windupTime: 1.5
   duration: 1.5
@@ -266,7 +278,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400002

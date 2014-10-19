@@ -46,6 +46,11 @@ public class GameController : MonoBehaviour {
     public delegate void TrapCountChangedHandler(TrapMetadata metadata, int change, int newTotal);
     public event TrapCountChangedHandler TrapCountChanged;
 
+    public Phase GetCurrentPhase()
+    {
+        return this.state.currentPhase;
+    }
+
     void Start()
     {
         this.GetComponent<AudioController>().PlayIngameBackgroundClip();

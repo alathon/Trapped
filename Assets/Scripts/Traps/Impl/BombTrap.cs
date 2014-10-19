@@ -24,8 +24,7 @@ public class BombTrap : TrapAction {
 
     protected override void Reset()
     {
+        base.Reset();
         GameObject.Destroy(prefabInst);
-        this.inUse = false;
-        this.StopAllCoroutines();
     }
 }
