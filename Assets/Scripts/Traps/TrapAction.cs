@@ -21,6 +21,11 @@ public class TrapAction : MonoBehaviour {
     protected bool inUse = false;
     protected GameController controller;
 
+    public bool CanUse()
+    {
+        return !this.inUse;
+    }
+
     public bool IsReuseable()
     {
         return reuseTime > 0;
