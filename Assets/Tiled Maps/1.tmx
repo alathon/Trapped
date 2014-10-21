@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="34" height="28" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="unity:scale" value="0.01"/>
+  <property name="unity:sortingLayerName" value="Background"/>
+ </properties>
+ <tileset firstgid="1" name="Atlas1" tilewidth="32" tileheight="32">
+  <image source="../Spritesheets/base_out_atlas.png" width="1024" height="1024"/>
+  <tile id="79">
+   <objectgroup draworder="index"/>
+  </tile>
+  <tile id="217">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="218">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="248">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="249">
+   <objectgroup draworder="index">
+    <object x="0" y="0">
+     <polygon points="0,0 16,0 16,24 32,24 32,32 0,32"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="250">
+   <objectgroup draworder="index">
+    <object x="0" y="16">
+     <polygon points="0,0 16,0 16,-16 32,-16 32,16 0,16"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="268">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="269">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="270">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="271">
+   <objectgroup draworder="index">
+    <object x="8" y="32">
+     <polygon points="0,0 24,-24 24,0"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="272">
+   <objectgroup draworder="index">
+    <object x="0" y="16" width="32" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="273">
+   <objectgroup draworder="index">
+    <object x="0" y="32">
+     <polygon points="0,0 24,0 0,-24"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="280">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="281">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="282">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="300">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="302">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="303">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="305">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="312">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="313">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="314">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="332">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="333">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="334">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="335">
+   <objectgroup draworder="index">
+    <object x="32" y="0">
+     <polygon points="0,0 0,24 -24,0"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="336">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="337">
+   <objectgroup draworder="index">
+    <object x="0" y="0">
+     <polygon points="0,0 0,24 24,0"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="344">
+   <objectgroup draworder="index">
+    <object x="16" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="345">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="346">
+   <objectgroup draworder="index">
+    <object x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="993">
+   <objectgroup draworder="index"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="1025" name="Atlas2" tilewidth="32" tileheight="32">
+  <image source="../Spritesheets/build_atlas.png" trans="ffffff" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="2049" name="3" tilewidth="32" tileheight="32">
+  <image source="../Spritesheets/obj_misk_atlas.png" trans="ffffff" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="3073" name="4" tilewidth="32" tileheight="32">
+  <image source="../Spritesheets/tilea2 (1).png" trans="ffffff" width="450" height="337"/>
+ </tileset>
+ <layer name="Floor" width="34" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztlEsKgDAMROPeO3gUexOv5lFdCaE4Q5lUCZKBB9VF+pp+zLSsyzNqNhHksZtGRo+j+z6JB8pb/fBuDYw9EQ+2bkQLzBk5H73rV/uCenT//+t9YX1lUd8xVJ+tB80VYbR+eeTwmH1OVQ/1npXH+J6xoBqqR1EURRbUzKjhcwHuDZos
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1"/>
+ <layer name="Walls" width="34" height="28">
+  <properties>
+   <property name="unity:sortingLayerName" value="Foreground"/>
+   <property name="unity:sortingOrder" value="0"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztltENgCAMRMtYhEnUzXEZfxuSnlKK2tBL+snlAeVKJaI99dVJsqrSryRgKiiDNVo/zxwbOOPjRQ5reefI4F5W7NMZHCifUCZJ6sk/7t9yje4N6al/cPyHo+1FLs281XJYv9sVOdC8vSuu0X+QtbzP2+AIjuD4lkObi9Z1AZCvQv4=
+  </data>
+ </layer>
+</map>

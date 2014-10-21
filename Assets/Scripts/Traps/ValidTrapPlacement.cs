@@ -31,13 +31,17 @@ public class ValidTrapPlacement : MonoBehaviour {
 
     private int collisions = 0;
 
+    bool ShouldBlock(GameObject gObj)
+    {
+        return (gObj.name.Equals("NavObstacle") || gObj.tag.Equals("Trap") || gObj.name.Equals("TimedSpawnerParent"));
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         GameObject gObj = other.gameObject;
         if (gObj == this.gameObject) return;
 
-
-        if (gObj.name.Equals("NavObstacle") || gObj.tag.Equals("Trap"))
+        if (ShouldBlock(gObj))
         {
             this.IsValid = false;
             this.collisions += 1;
@@ -50,7 +54,7 @@ public class ValidTrapPlacement : MonoBehaviour {
         GameObject gObj = other.gameObject;
         if (gObj == this.gameObject) return;
 
-        if (gObj.name.Equals("NavObstacle") || gObj.tag.Equals("Trap"))
+        if (ShouldBlock(gObj))
         {
             this.collisions -= 1;
         }

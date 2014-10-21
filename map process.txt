@@ -1,0 +1,17 @@
+1) Create map in Tiled.
+2) Export via Tiled2Unity.
+3) Create new scene in Unity.
+4) Drag MainCamera, Directional Lighting and EnsureComponents prefabs onto scene.
+5) Drag exported map onto scene, position at (0,0).
+6) Select Walls GameObject and set to 'Obstacles' layer.
+7) Delete Collision object in Walls.
+8) Create Poly|Nav obstacles for walls/blocking objects.
+	8.1) Set 'Use Trigger Polygon' to false and remove 'Is Trigger' from each
+	NavObstacle.
+
+9) Create SortOrderChangers for areas where character should be below wall/object texture.
+10) Place SpawnPoint (player spawn) prefab.
+11) Drag in Background Music prefab.
+12) Create numbered wave objects under a 'Waves' object.
+13) Create Rooms GameObject with 'Room Controller' script, and sub-objects with 'Room' scripts.
+  

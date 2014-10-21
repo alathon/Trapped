@@ -253,7 +253,7 @@ public class GameController : MonoBehaviour {
         return this.state.currentPhase;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (this.state.currentPhase == Phase.Planning) PlanningPhase_Update();
         else if (this.state.currentPhase == Phase.Action) ActionPhase_Update();
@@ -294,7 +294,8 @@ public class GameController : MonoBehaviour {
         foreach (Transform child in waveObj)
         {
             this.state.spawnersLeft++;
-            TimedSpawner spawner = child.GetComponent<TimedSpawner>();
+            Transform actualSpawner = child.Find("TimedSpawner");
+            TimedSpawner spawner = actualSpawner.GetComponent<TimedSpawner>();
             spawner.MobSpawned += new TimedSpawner.MobSpawnedHandler(OnMobSpawned);
             spawner.SpawnerDone += new TimedSpawner.SpawnerDoneHandler(OnSpawnerDone);
             spawner.StartSpawning();
@@ -352,6 +353,14 @@ public class GameController : MonoBehaviour {
     void PlanningPhase_Start()
     {
         GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().ActivateGUI();
+        Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
+        Transform waveObj = waveParent.transform.Find(this.state.currentWave.ToString() + "/Spawners");
+        foreach (Transform child in waveObj)
+        {
+            Transform actualSpawner = child.Find("TimedSpawner");
+            TimedSpawner spawner = actualSpawner.GetComponent<TimedSpawner>();
+            spawner.ActivateGraphic();
+        }
     }
 
     /// <summary>
