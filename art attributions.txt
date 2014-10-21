@@ -27,3 +27,4 @@ http://www.flaticon.com/free-icon/mouse-left-button_32041
 WASD image - Courtesey of http://inventwithpython.com/pygame/chapter4.html
 Kenney.nl - RPG Pack (http://opengameart.org/content/ui-pack-rpg-extension)
 fluxord - Crosshairs (http://opengameart.org/content/20-crosshairs-for-re)
+Clint Bellanger - Teleport / Berzerk rune (http://opengameart.org/content/teleport-rune)

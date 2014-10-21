@@ -24,6 +24,7 @@ public class TimedSpawner : MonoBehaviour {
 
     public void StartSpawning()
     {
+        this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
         StartCoroutine(Spawn());
     }
 
@@ -41,6 +42,7 @@ public class TimedSpawner : MonoBehaviour {
         GameObject prefab = this.prefabs[Random.Range(0, this.prefabs.Length - 1)];
         GameObject mob = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
         mob.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnMobDeath);
+        this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0f);
         if (this.MobSpawned != null)
         {
             this.MobSpawned(mob);
