@@ -86,7 +86,8 @@ public class GameController : MonoBehaviour {
         this.state.spawnersLeft = 0;
         Transform waves = GameObject.FindGameObjectWithTag("Waves").transform;
         this.state.maxWave = waves.childCount;
-        this.SetWave(1);
+        this.state.currentWave = 0;
+        this.NextWave();
     }
 
     void SetLevel(int level)
@@ -142,7 +143,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    IEnumerator NextWave()
+    void NextWave()
     {
         // Level complete.
         if (this.state.maxWave == this.state.currentWave)
@@ -159,24 +160,40 @@ public class GameController : MonoBehaviour {
         }
         else // Load next wave.
         {
-            GameObject txt = (GameObject)Instantiate(Resources.Load("Invaders defeated text"));
-            txt.transform.SetParent(GameObject.FindGameObjectWithTag("MainCanvas").transform);
-            yield return new WaitForSeconds(3.5f); // Oh god the horror! Magic number to match with animation length + extra.. Eghhhh!
-            GameObject.Destroy(txt);
             this.SetState(Phase.Planning);
             this.SetWave(this.state.currentWave + 1);
+            Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
+            Transform waveObj = waveParent.transform.Find(this.state.currentWave.ToString() + "/Spawners");
+            foreach (Transform child in waveObj)
+            {
+                this.state.spawnersLeft++;
+                Transform actualSpawner = child.Find("TimedSpawner");
+                TimedSpawner spawner = actualSpawner.GetComponent<TimedSpawner>();
+                spawner.MobSpawned += new TimedSpawner.MobSpawnedHandler(OnMobSpawned);
+                spawner.SpawnerDone += new TimedSpawner.SpawnerDoneHandler(OnSpawnerDone);
+                spawner.ActivateGraphic();
+            }
         }
     }
 
     public void OnSpawnerDone(TimedSpawner spawner)
     {
-        
         this.state.spawnersLeft -= 1;
+        Debug.Log("OnSpawnerDone: Now left = " + this.state.spawnersLeft);
         // Wave complete. No spawners left.
         if (this.state.spawnersLeft == 0)
         {
-            StartCoroutine(this.NextWave());
+            StartCoroutine(this.DisplayDefeatText());
+            this.NextWave();
         }
+    }
+
+    IEnumerator DisplayDefeatText()
+    {
+        GameObject txt = (GameObject)Instantiate(Resources.Load("Invaders defeated text"));
+        txt.transform.SetParent(GameObject.FindGameObjectWithTag("MainCanvas").transform);
+        yield return new WaitForSeconds(3.5f); // Oh god the horror! Magic number to match with animation length + extra.. Eghhhh!
+        GameObject.Destroy(txt);
     }
 
     public void OnMobSpawned(GameObject mob)
@@ -299,11 +316,8 @@ public class GameController : MonoBehaviour {
         Transform waveObj = waveParent.transform.Find(this.state.currentWave.ToString() + "/Spawners");
         foreach (Transform child in waveObj)
         {
-            this.state.spawnersLeft++;
             Transform actualSpawner = child.Find("TimedSpawner");
             TimedSpawner spawner = actualSpawner.GetComponent<TimedSpawner>();
-            spawner.MobSpawned += new TimedSpawner.MobSpawnedHandler(OnMobSpawned);
-            spawner.SpawnerDone += new TimedSpawner.SpawnerDoneHandler(OnSpawnerDone);
             spawner.StartSpawning();
         }
 
@@ -359,14 +373,6 @@ public class GameController : MonoBehaviour {
     void PlanningPhase_Start()
     {
         GameObject.FindGameObjectWithTag("PlanningPhase_GUI").GetComponent<PlanningPhaseUIManager>().ActivateGUI();
-        Transform waveParent = GameObject.FindGameObjectWithTag("Waves").transform;
-        Transform waveObj = waveParent.transform.Find(this.state.currentWave.ToString() + "/Spawners");
-        foreach (Transform child in waveObj)
-        {
-            Transform actualSpawner = child.Find("TimedSpawner");
-            TimedSpawner spawner = actualSpawner.GetComponent<TimedSpawner>();
-            spawner.ActivateGraphic();
-        }
     }
 
     /// <summary>

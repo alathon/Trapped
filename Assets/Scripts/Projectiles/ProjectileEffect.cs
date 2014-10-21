@@ -10,6 +10,8 @@ public class ProjectileEffect : MonoBehaviour {
 
     protected bool firedByPlayer = false;
 
+    public float speed = 4.5f;
+
     public void SetFiredByPlayer(bool val)
     {
         this.firedByPlayer = val;

@@ -26,7 +26,7 @@ public class RangedBowAI : AI {
         projectile.GetComponent<ProjectileEffect>().SetFiredByPlayer(false);
         projectile.transform.position = this.transform.position;
         projectile.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        projectile.GetComponent<Rigidbody2D>().velocity = dir * 7.5f;
+        projectile.GetComponent<Rigidbody2D>().velocity = dir * projectile.GetComponent<ProjectileEffect>().speed;
 
         this.attackState = AttackState.Recharge;
         yield return new WaitForSeconds(this.attackSpeed);
