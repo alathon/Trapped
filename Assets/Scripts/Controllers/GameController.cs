@@ -201,10 +201,20 @@ public class GameController : MonoBehaviour {
         mob.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnMobDeath);
     }
 
-    public void OnMobDeath(GameObject mob)
+    IEnumerator MobDeath(GameObject mob)
     {
         this.GainMana(Random.Range(350, 700) * Application.loadedLevel);
+        Vector2 position = mob.transform.position;
+        GameObject soundObj = (GameObject)Instantiate(Resources.Load("MobDeath"), position, Quaternion.identity);
         GameObject.Destroy(mob);
+        yield return new WaitForSeconds(1.02f);
+        GameObject.Destroy(soundObj);
+    }
+
+    public void OnMobDeath(GameObject mob)
+    {
+        StartCoroutine(MobDeath(mob));
+        
     }
 
     void GainMana(int amount)

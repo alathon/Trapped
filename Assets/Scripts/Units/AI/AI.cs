@@ -69,6 +69,7 @@ public class AI : MonoBehaviour {
 
     virtual protected void AIRoutine()
     {
+
         if (this.playerState.IsDead())
         {
             this.agent.Stop();
@@ -76,6 +77,12 @@ public class AI : MonoBehaviour {
         }
 
         if (this.GetComponent<UnitState>().Stunned)
+        {
+            this.agent.Stop();
+            return;
+        }
+
+        if (this.GetComponent<UnitState>().CurrentLife == 0)
         {
             this.agent.Stop();
             return;
@@ -187,6 +194,8 @@ public class AI : MonoBehaviour {
 
     void LateUpdate()
     {
+        if (this.GetComponent<UnitState>().CurrentLife == 0) return;
+
         if (this.GetComponent<UnitState>().Stunned || this.playerState.IsDead())
         {
             this.agent.Stop();
