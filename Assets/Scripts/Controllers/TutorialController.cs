@@ -75,21 +75,21 @@ public class TutorialController : MonoBehaviour {
 
     public void OnTrapCountChanged(TrapMetadata trap, int change, int newTotal)
     {
-        if (newTotal == change && change > 0)
-        {
-            if (trap.name.Equals("Bomb Trap"))
-            {
-                this.ShowBombTutorial();
-            }
-            else if (trap.name.Equals("Spike Trap"))
-            {
-                this.ShowSpikeTutorial();
-            }
-            else if (trap.name.Equals("Fireball Trap"))
-            {
-                this.ShowFireballTutorial();
-            }
-        }
+        //if (newTotal == change && change > 0)
+        //{
+        //    if (trap.name.Equals("Bomb Trap"))
+        //    {
+        //        this.ShowBombTutorial();
+        //    }
+        //    else if (trap.name.Equals("Spike Trap"))
+        //    {
+        //        this.ShowSpikeTutorial();
+        //    }
+        //    else if (trap.name.Equals("Fireball Trap"))
+        //    {
+        //        this.ShowFireballTutorial();
+        //    }
+        //}
     }
 
     public void OnCloseTutorialWnd(GameObject wnd)
