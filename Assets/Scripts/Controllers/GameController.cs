@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Controllers;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     private TrapPrefabsManager trapPrefabsManager;
@@ -49,6 +50,11 @@ public class GameController : MonoBehaviour {
     public Phase GetCurrentPhase()
     {
         return this.state.currentPhase;
+    }
+
+    public int GetCurrentWave()
+    {
+        return this.state.currentWave;
     }
 
     void Start()

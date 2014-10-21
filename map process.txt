@@ -12,6 +12,5 @@
 9) Create SortOrderChangers for areas where character should be below wall/object texture.
 10) Place SpawnPoint (player spawn) prefab.
 11) Drag in Background Music prefab.
-12) Create numbered wave objects under a 'Waves' object.
-13) Create Rooms GameObject with 'Room Controller' script, and sub-objects with 'Room' scripts.
-  
+12) Create Rooms GameObject with 'Room Controller' script, and sub-objects with 'Room' scripts.
+13) Create numbered wave objects under a 'Waves' object.

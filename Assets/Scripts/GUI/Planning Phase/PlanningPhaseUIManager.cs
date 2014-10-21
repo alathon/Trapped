@@ -20,11 +20,40 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     private GameObject trapPanel;
     private GameObject planningPhaseGUI;
 
+    void ShowStartBtn()
+    {
+        GameObject canvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        GameObject startBtn = canvas.transform.Find("Planning Phase/StartBtn").gameObject;
+        GameObject startBtnText = startBtn.transform.Find("Text").gameObject;
+
+        startBtn.GetComponent<Button>().interactable = true;
+        Color prevColor = startBtn.GetComponent<Image>().color;
+        startBtn.GetComponent<Image>().color = new Color(prevColor.r, prevColor.g, prevColor.b, 1f);
+
+        prevColor = startBtnText.GetComponent<Text>().color;
+        startBtnText.GetComponent<Text>().color = new Color(prevColor.r, prevColor.g, prevColor.b, 1f);
+    }
+
+    void HideStartBtn()
+    {
+        GameObject canvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        GameObject startBtn = canvas.transform.Find("Planning Phase/StartBtn").gameObject;
+        GameObject startBtnText = startBtn.transform.Find("Text").gameObject;
+
+        startBtn.GetComponent<Button>().interactable = false;
+        Color prevColor = startBtn.GetComponent<Image>().color;
+        startBtn.GetComponent<Image>().color = new Color(prevColor.r, prevColor.g, prevColor.b, 0f);
+
+        prevColor = startBtnText.GetComponent<Text>().color;
+        startBtnText.GetComponent<Text>().color = new Color(prevColor.r, prevColor.g, prevColor.b, 0f);
+    }
+
     void Start()
     {
         this.trapPanel = GameObject.FindGameObjectWithTag("PlanningPhase_TrapsPanel");
         this.controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         this.controller.TrapCountChanged += new GameController.TrapCountChangedHandler(OnTrapCountChanged);
+        this.controller.OutOfTraps += new GameController.OutOfTrapsHandler(OnOutOfTraps);
     }
 
     public void ActivateGUI()
@@ -39,6 +68,11 @@ public class PlanningPhaseUIManager : MonoBehaviour {
         this.GetComponent<CanvasGroup>().alpha = 0f;
         this.GetComponent<CanvasGroup>().interactable = false;
         this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
+    public void OnOutOfTraps()
+    {
+        this.ShowStartBtn();
     }
 
     public void OnClickEndPhaseBtn()
@@ -68,6 +102,11 @@ public class PlanningPhaseUIManager : MonoBehaviour {
     /// </param>
     public void OnTrapCountChanged(TrapMetadata metadata, int added, int newCount)
     {
+        if (added > 0)
+        {
+            this.HideStartBtn();
+        }
+
         string trapName = metadata.trapName;
         if (newCount > 0)
         {
