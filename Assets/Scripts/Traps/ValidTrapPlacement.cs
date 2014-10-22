@@ -1,8 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Collider2D))]
 public class ValidTrapPlacement : MonoBehaviour {
+    private GameController controller;
+
+    private GameController Controller
+    {
+        get
+        {
+            if (controller == null)
+            {
+                controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+            }
+            return controller;
+        }
+    }
 
     private bool isValid = true;
     public bool IsValid
@@ -33,7 +47,15 @@ public class ValidTrapPlacement : MonoBehaviour {
 
     bool ShouldBlock(GameObject gObj)
     {
-        return (gObj.name.Equals("NavObstacle") || gObj.tag.Equals("Trap") || gObj.name.Equals("TimedSpawnerParent"));
+        if(gObj.name.Equals("NavObstacle") || gObj.tag.Equals("Trap")) return true;
+        if(gObj.name.Equals("TimedSpawnerParent")) {
+            Transform wave = gObj.transform.parent.parent;
+            if (Convert.ToInt32(wave.name) == Controller.GetCurrentWave())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -43,6 +65,7 @@ public class ValidTrapPlacement : MonoBehaviour {
 
         if (ShouldBlock(gObj))
         {
+            Debug.Log(gObj + " should block me... Not valid.");
             this.IsValid = false;
             this.collisions += 1;
             return;
@@ -65,52 +88,4 @@ public class ValidTrapPlacement : MonoBehaviour {
             this.IsValid = true;
         }
     }
-
-    //void LateUpdate()
-    //{
-    //    foreach (RaycastHit2D hit in Physics2D.BoxCastAll(trapCollider.bounds.center, trapCollider.bounds.size, 0f, Vector2.zero)) {
-    //        GameObject target = hit.transform.gameObject;
-
-    //        // Hitting a trap? No go.
-    //        if (target.tag.Equals("Trap"))
-    //        {
-    //            Debug.Log("Hit trap. Not valid!");
-    //            this.IsValid = false;
-    //            return;
-    //        }
-    //        else if (target.name.Equals("NavObstacle")) // Wall? Wall is okay, unless the sprite itself overlaps. Sprite is 32x32.
-    //        {
-    //            float dist = Vector2.Distance(target.transform.position, this.transform.position);
-    //            Debug.Log("Distance to NavObstacle: " + dist);
-    //            if (dist < 0.32f)
-    //            {
-    //                this.IsValid = false;
-    //                return;
-    //            }
-    //        }
-    //    }
-
-    //    this.IsValid = true;
-    //}
-
-    //void LateUpdate()
-    //{
-    //    foreach (Collider2D col in Physics2D.BoxCastAll(trapCollider.bounds.center, trapCollider.bounds.size, 0f, )
-    //    foreach (Vector2 point in trapCollider.points)
-    //    {
-    //        Vector2 worldSpacePoint = this.transform.TransformPoint(point);
-    //        var hit = Physics2D.Raycast(worldSpacePoint, Vector2.zero, 0f);
-    //        if (hit.collider == null) continue;
-
-    //        GameObject gObj = hit.collider.transform.gameObject;
-    //        string gObjName = gObj.name;
-    //        if (gObjName.Equals("NavObstacle"))
-    //        {
-    //            this.IsValid = false;
-    //            return;
-    //        }
-    //    }
-
-    //    this.IsValid = true;
-    //}
 }

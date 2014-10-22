@@ -35,14 +35,7 @@ public class TrapAction : MonoBehaviour {
     {
         if (inUse) return;
 
-        if (windupTime > 0)
-        {
-            StartCoroutine(Windup());
-        }
-        else
-        {
-            StartCoroutine(Action());
-        }
+        StartCoroutine(Windup());
     }
 
     void Start()

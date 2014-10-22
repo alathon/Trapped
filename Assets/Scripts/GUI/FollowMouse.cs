@@ -14,6 +14,12 @@ public class FollowMouse : MonoBehaviour {
 
     public PlacementState state;
 
+    private Transform spriteTransform;
+
+    void Awake()
+    {
+        this.spriteTransform = this.transform.Find("Sprite");
+    }
     /// <summary>
     /// When not placed, change position.
     /// When placed, change trap to face looking at the mouse cursor.
@@ -24,13 +30,13 @@ public class FollowMouse : MonoBehaviour {
             Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (state == PlacementState.Placing)
             {
-                transform.position = new Vector3(mousePosInWorld.x, mousePosInWorld.y, 0f);
+                this.transform.position = new Vector3(mousePosInWorld.x, mousePosInWorld.y, 0f);
             }
             else if (state == PlacementState.Angling)
             {
                 var dir = mousePosInWorld - transform.position;
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                spriteTransform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
                 //transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
             }
         }

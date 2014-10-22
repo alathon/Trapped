@@ -21,7 +21,7 @@ public class WaveAwards : MonoBehaviour {
                 GameObject bomb = controller.GetComponent<TrapPrefabsManager>().GetTrapObjByName("Bomb Trap");
                 controller.AddTraps(bomb, 3);
             } else if(newWave == 2) {
-                GameObject spike = controller.GetComponent<TrapPrefabsManager>().GetTrapObjByName("Spike Trap");
+                GameObject spike = controller.GetComponent<TrapPrefabsManager>().GetTrapObjByName("Arrow Trap");
                 controller.AddTraps(spike, 2);
             }
         }

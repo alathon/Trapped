@@ -55,7 +55,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138dda9afe2d6cf458bf46be8deb5c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: 0ff101eb80684dc4b8ab628cc180d6d8, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 100000, guid: 9a05e7729f3a7124788dfef385155256, type: 2}
+  - {fileID: 100004, guid: b68a3af9876f61646ae27abf0e5f9340, type: 2}
   - {fileID: 100000, guid: 31742693e36b3ac45b9d0cdf4df22ae9, type: 2}
   - {fileID: 100004, guid: 752378489a65b4e4589aa1e8d67e4749, type: 2}
 --- !u!114 &11400006

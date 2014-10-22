@@ -419,23 +419,6 @@ public class GameController : MonoBehaviour {
                 }
             }
         }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            this.PlanningPhase_Cancel();
-        }
-    }
-
-
-
-    /// <summary>
-    /// Cancel any on-going action.
-    /// </summary>
-    void PlanningPhase_Cancel()
-    {
-        if (this.state.CurrentPlacementPrefab != null)
-        {
-            GameObject.Destroy(this.state.CurrentPlacementPrefab);
-        }
     }
 
     public void PlanningPhase_PickupTrap(GameObject trapPrefab)

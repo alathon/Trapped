@@ -24,6 +24,12 @@ public class AI : MonoBehaviour {
     }
 
     [SerializeField]
+    protected float walkSpeed = 0.65f;
+
+    [SerializeField]
+    protected float chaseSpeed = 1.15f;
+
+    [SerializeField]
     protected float minAttackRange = 0f;
 
     [SerializeField]
@@ -55,6 +61,7 @@ public class AI : MonoBehaviour {
 
     void Start() {
         this.roomCtrl = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomController>();
+        this.agent.maxSpeed = this.walkSpeed;
         InitializeAI();
         InvokeRepeating("AIRoutine", 0f, 0.1f);
     }
@@ -125,7 +132,9 @@ public class AI : MonoBehaviour {
                 Vector2 targetPosition = Vector2.zero;
                 if (pathLen >= this.forgetRange)
                 {
-                    this.agent.SetDestination(this.roomCtrl.GetRandomRoom().transform.position); 
+                    this.agent.maxSpeed = this.walkSpeed;
+                    this.animator.speed = 0.5f;
+                    this.agent.SetDestination(this.roomCtrl.GetRandomRoom().transform.position);
                 }
                 else
                 {
@@ -137,6 +146,8 @@ public class AI : MonoBehaviour {
 
     virtual protected void MoveTowardsPlayer(bool canSee)
     {
+        this.agent.maxSpeed = this.chaseSpeed;
+        this.animator.speed = 1f;
         this.agent.SetDestination(this.player.transform.position);
     }
 
