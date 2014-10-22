@@ -65,7 +65,6 @@ public class ValidTrapPlacement : MonoBehaviour {
 
         if (ShouldBlock(gObj))
         {
-            Debug.Log(gObj + " should block me... Not valid.");
             this.IsValid = false;
             this.collisions += 1;
             return;
