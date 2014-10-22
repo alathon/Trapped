@@ -111,7 +111,7 @@ public class AI : MonoBehaviour {
         // We can't attack. Can we see the player??
         if (!blocked)
         {
-            StartCoroutine(this.MoveTowardsPlayer(true));
+            this.MoveTowardsPlayer(true);
             
         }
         else // We can't see the player. Are we close enough to roam towards them, or do we go somewhere random??
@@ -129,16 +129,15 @@ public class AI : MonoBehaviour {
                 }
                 else
                 {
-                    StartCoroutine(this.MoveTowardsPlayer(false));
+                    this.MoveTowardsPlayer(false);
                 }
             }
         }
     }
 
-    virtual protected IEnumerator MoveTowardsPlayer(bool canSee)
+    virtual protected void MoveTowardsPlayer(bool canSee)
     {
         this.agent.SetDestination(this.player.transform.position);
-        yield break;
     }
 
     protected float GetPathLength(List<Vector2> path)
