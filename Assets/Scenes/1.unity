@@ -432,6 +432,10 @@ Prefab:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: edea0859341f8bb4cba14d7215bfd26b, type: 2}
+      propertyPath: prefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: 15513b3ca164a184d8001cc4af79c994, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edea0859341f8bb4cba14d7215bfd26b, type: 2}
   m_RootGameObject: {fileID: 165292436}

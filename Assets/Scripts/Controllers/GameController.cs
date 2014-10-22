@@ -179,7 +179,6 @@ public class GameController : MonoBehaviour {
     public void OnSpawnerDone(TimedSpawner spawner)
     {
         this.state.spawnersLeft -= 1;
-        Debug.Log("OnSpawnerDone: Now left = " + this.state.spawnersLeft);
         // Wave complete. No spawners left.
         if (this.state.spawnersLeft == 0)
         {
@@ -207,7 +206,7 @@ public class GameController : MonoBehaviour {
         Vector2 position = mob.transform.position;
         GameObject soundObj = (GameObject)Instantiate(Resources.Load("MobDeath"), position, Quaternion.identity);
         GameObject.Destroy(mob);
-        yield return new WaitForSeconds(1.02f);
+        yield return new WaitForSeconds(1.02f); // More magic number horror :( The sound is 1s in length.
         GameObject.Destroy(soundObj);
     }
 

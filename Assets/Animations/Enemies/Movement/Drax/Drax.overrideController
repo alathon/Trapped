@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Drax
+  m_Controller: {fileID: 9100000, guid: 5ee1b590b6d6f6642ad7bea3a0d64a60, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: da2a0bf576ad7b54bae9fa5975063342, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 907aedd11142d2247b01dd0c97dcf0c1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 710f433bb60543c44be5b3113dcdaaee, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8de153a6d2088544a9fca487c4d720e2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0bb89e0c1cf9e0b4a929110d5d797beb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e3ba2060d711bcd44a387d834ce2d345, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: cc6ab5d0ce2d40d4e94729d18cf59b68, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ff4870d7f50696a4f87801cae1de3774, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 87397e5e9e6b1c440a3db495ded4b6a3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e7ae7cc3569f0c842a370ab21dc8e212, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 141436d682e519549a20a2a44a1d7749, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 73b789cbc61385943994d6cf357a51b0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e67184c545352cb4c9b4a2d8bb014652, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 58957afe472b9bb41be8e58f4097a3f2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8cc593549a2dd7a4eb2b2dc3a815fdd7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2833bec78d4127f4c99a7ad6fcefcb01, type: 2}

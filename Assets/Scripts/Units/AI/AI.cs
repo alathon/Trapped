@@ -69,7 +69,6 @@ public class AI : MonoBehaviour {
 
     virtual protected void AIRoutine()
     {
-
         if (this.playerState.IsDead())
         {
             this.agent.Stop();
@@ -90,6 +89,7 @@ public class AI : MonoBehaviour {
 
         if (attackState == AttackState.Attack)
         {
+            Debug.Log("Attacking..");
             return;
         }
 
@@ -112,12 +112,14 @@ public class AI : MonoBehaviour {
         // We can't attack. Can we see the player??
         if (!blocked)
         {
+            Debug.Log("Setting destination.");
             this.agent.SetDestination(this.player.transform.position);
         }
         else // We can't see the player. Are we close enough to roam towards them, or do we go somewhere random??
         {
             if (!this.agent.hasPath)
             {
+                Debug.Log("Setting destination.");
                 // Set destination on player so we can measure path length.
                 this.agent.SetDestination(this.player.transform.position);
                 float pathLen = this.GetPathLength(this.agent.activePath);

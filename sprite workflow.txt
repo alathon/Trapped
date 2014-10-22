@@ -1,0 +1,22 @@
+Sprite workflow:
+
+1) Place sprite in Assets/Spritesheets.
+2) In Unity, under the sprite select 'Multiple' sprite mode, and hit Sprite Editor.
+3) In Sprite Editor, slice the sprite correctly (usually using a grid).
+4) In Sprite Editor, position the Pivot as a custom pivot at the feet, for every sprite frame.
+5) Drag one of each direction of the sprite into the scene.
+6) For each direction, click on it and select 'Animation'. Create an idle and walking
+animation. The idle animation is just the first frame of the walk, and the walking animation
+uses sample-size 12, and the frames sequentially placed one after the other (Drag them from
+the sprite in the Project).
+7) Once done, right-click under Animation folder and create a new Animation Controller Override,
+overriding Generic Movement. Give it all of the animations just created (4x idle, 4x walk).
+8) Delete all but one of the directional sprites created, give it an Animator, set the animator
+to the one you just created.
+9) Give it a Rigidbody2D, BoxCollider2D (around feet only), PolyNav Agent and an
+appropriate AI script.
+10) Set Rigidbody2D to be Fixed Angle & Kinematic
+11) Give it the Hitbox and HP Bar prefabs, and size the hitbox BoxCollider to encase the entire
+sprite. Push the HP Bar somewhere just above the hitbox of the sprite.
+12) Set appropriate PolyNav Agent values (f.ex Mass 25, stop distance 0.25, decel rate 0,
+slow distance 0, rotate speed 10, max speed 1.15 - 1.5
