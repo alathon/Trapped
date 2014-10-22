@@ -1,7 +1,23 @@
 fileFormatVersion: 2
 guid: 8343057dc136e6c4a993b5dc1b766f10
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: havelockvetinari_0
+    21300002: havelockvetinari_1
+    21300004: havelockvetinari_2
+    21300006: havelockvetinari_3
+    21300008: havelockvetinari_4
+    21300010: havelockvetinari_5
+    21300012: havelockvetinari_6
+    21300014: havelockvetinari_7
+    21300016: havelockvetinari_8
+    21300018: havelockvetinari_9
+    21300020: havelockvetinari_10
+    21300022: havelockvetinari_11
+    21300024: havelockvetinari_12
+    21300026: havelockvetinari_13
+    21300028: havelockvetinari_14
+    21300030: havelockvetinari_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,16 +41,16 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 9
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
@@ -42,6 +58,166 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: havelockvetinari_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: havelockvetinari_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: .5, y: .180000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

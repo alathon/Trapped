@@ -89,7 +89,6 @@ public class AI : MonoBehaviour {
 
         if (attackState == AttackState.Attack)
         {
-            Debug.Log("Attacking..");
             return;
         }
 
@@ -112,14 +111,13 @@ public class AI : MonoBehaviour {
         // We can't attack. Can we see the player??
         if (!blocked)
         {
-            Debug.Log("Setting destination.");
-            this.agent.SetDestination(this.player.transform.position);
+            StartCoroutine(this.MoveTowardsPlayer(true));
+            
         }
         else // We can't see the player. Are we close enough to roam towards them, or do we go somewhere random??
         {
             if (!this.agent.hasPath)
             {
-                Debug.Log("Setting destination.");
                 // Set destination on player so we can measure path length.
                 this.agent.SetDestination(this.player.transform.position);
                 float pathLen = this.GetPathLength(this.agent.activePath);
@@ -127,19 +125,23 @@ public class AI : MonoBehaviour {
                 Vector2 targetPosition = Vector2.zero;
                 if (pathLen >= this.forgetRange)
                 {
-                    targetPosition = this.roomCtrl.GetRandomRoom().transform.position;
+                    this.agent.SetDestination(this.roomCtrl.GetRandomRoom().transform.position); 
                 }
                 else
                 {
-                    targetPosition = this.player.transform.position;
+                    StartCoroutine(this.MoveTowardsPlayer(false));
                 }
-
-                this.agent.SetDestination(targetPosition);
             }
         }
     }
 
-    float GetPathLength(List<Vector2> path)
+    virtual protected IEnumerator MoveTowardsPlayer(bool canSee)
+    {
+        this.agent.SetDestination(this.player.transform.position);
+        yield break;
+    }
+
+    protected float GetPathLength(List<Vector2> path)
     {
         float total = 0f;
         Vector2 pastVect = this.transform.position;
