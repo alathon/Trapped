@@ -15,29 +15,40 @@ public class TrapReadyIndicator : MonoBehaviour {
         circleImage.color = new Color(0, 255, 0, 0f);
     }
 
+    void OnDestroy()
+    {
+        controller.PhaseChanged -= OnPhaseChanged;
+    }
+
     public void OnPhaseChanged(Phase newPhase)
     {
-        if (newPhase == Phase.Action)
+        if (this.circleImage != null)
         {
-            Color prev = this.circleImage.color;
-            this.circleImage.color = new Color(prev.r, prev.g, prev.b, 1f);
-        }
-        else
-        {
-            Color prev = this.circleImage.color;
-            this.circleImage.color = new Color(prev.r, prev.g, prev.b, 0f);
+            if (newPhase == Phase.Action)
+            {
+                Color prev = this.circleImage.color;
+                this.circleImage.color = new Color(prev.r, prev.g, prev.b, 1f);
+            }
+            else
+            {
+                Color prev = this.circleImage.color;
+                this.circleImage.color = new Color(prev.r, prev.g, prev.b, 0f);
+            }
         }
     }
 
     public void OnUseUpdate(bool inUse)
     {
-        if (inUse)
+        if (this.circleImage != null)
         {
-            circleImage.color = new Color(255, 0, 0, 1f);
-        }
-        else
-        {
-            circleImage.color = new Color(0, 255, 0, 1f);
+            if (inUse)
+            {
+                circleImage.color = new Color(255, 0, 0, 1f);
+            }
+            else
+            {
+                circleImage.color = new Color(0, 255, 0, 1f);
+            }
         }
     }
 }

@@ -48,12 +48,20 @@ public class LifeManager : MonoBehaviour {
         }
     }
 
-	void Start () {
+    void Start()
+    {
         GameObject gObj = GameObject.FindGameObjectWithTag("Player");
         UnitState state = gObj.GetComponent<UnitState>();
         this.ChangeLifeMax(state.MaximumLife);
         state.LifeChanged += new UnitState.LifeChangedHandler(OnLifeChanged);
-	}
+    }
+
+    void OnDestroy()
+    {
+        GameObject gObj = GameObject.FindGameObjectWithTag("Player");
+        UnitState state = gObj.GetComponent<UnitState>();
+        state.LifeChanged -= OnLifeChanged;
+    }
 
     public void OnLifeChanged(int newLife, bool tookDamage)
     {

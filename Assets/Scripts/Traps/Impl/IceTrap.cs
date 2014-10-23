@@ -40,6 +40,17 @@ public class IceTrap : TrapAction {
         {
             GameObject.Destroy(gObj);
         }
+        this.iceSpawns = new List<GameObject>();
         yield return StartCoroutine(PostAction());
+    }
+
+    protected virtual void Reset()
+    {
+        base.Reset();
+        foreach (GameObject gObj in iceSpawns)
+        {
+            GameObject.Destroy(gObj);
+        }
+        this.iceSpawns = new List<GameObject>();
     }
 }

@@ -28,6 +28,13 @@ public class TutorialController : MonoBehaviour {
         this.controller.PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChanged);
     }
 
+    void OnDestroy()
+    {
+        this.controller.TrapCountChanged -= OnTrapCountChanged;
+        this.controller.WaveChanged -= OnWaveChanged;
+        this.controller.PhaseChanged -= OnPhaseChanged;
+    }
+
     IEnumerator StartPlanningTutorial()
     {
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");

@@ -56,6 +56,11 @@ public class PlanningPhaseUIManager : MonoBehaviour {
         this.controller.OutOfTraps += new GameController.OutOfTrapsHandler(OnOutOfTraps);
     }
 
+    void OnDestroy()
+    {
+        this.controller.TrapCountChanged -= OnTrapCountChanged;
+        this.controller.OutOfTraps -= OnOutOfTraps;
+    }
     public void ActivateGUI()
     {
         this.GetComponent<CanvasGroup>().alpha = 1f;

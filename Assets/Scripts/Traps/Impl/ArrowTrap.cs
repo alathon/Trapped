@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ArrowTrap : TrapAction {
 
@@ -12,6 +13,8 @@ public class ArrowTrap : TrapAction {
     [SerializeField]
     private int arrows = 3;
 
+    private List<GameObject> arrowSpawns = new List<GameObject>();
+
     protected override IEnumerator Action()
     {
         Transform spriteTransform = this.transform.Find("Sprite");  // We use the sprite's transform, because thats the one thats
@@ -19,6 +22,7 @@ public class ArrowTrap : TrapAction {
         for (int i = 0; i < arrows; i++)
         {
             GameObject arrow = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
+            this.arrowSpawns.Add(arrow);
             arrow.transform.SetParent(this.transform);
             arrow.GetComponent<Rigidbody2D>().velocity = spriteTransform.up * this.arrowSpeed;
             var vel = arrow.GetComponent<Rigidbody2D>().velocity;
@@ -33,4 +37,15 @@ public class ArrowTrap : TrapAction {
         //pSystem.transform.SetParent(this.transform);
         //pSystem.transform.RotateAroundLocal(Vector3.right, this.transform.rotation.z);
     }
+
+    protected virtual void Reset()
+    {
+        base.Reset();
+        foreach (GameObject gObj in arrowSpawns)
+        {
+            GameObject.Destroy(gObj);
+        }
+        this.arrowSpawns = new List<GameObject>();
+    }
+
 }

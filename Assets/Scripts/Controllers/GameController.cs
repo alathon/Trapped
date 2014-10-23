@@ -60,16 +60,6 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         this.GetComponent<AudioController>().PlayIngameBackgroundClip();
-    }
-
-    IEnumerator OnLevelWasLoaded(int lvl)
-    {
-        if (this.player == null)
-        {
-            this.player = GameObject.FindGameObjectWithTag("Player");
-            this.player.GetComponent<UnitState>().Death += new UnitState.DeathHandler(OnPlayerDeath);
-        }
-
         if (this.trapPrefabsManager == null)
         {
             this.trapPrefabsManager = this.GetComponent<TrapPrefabsManager>();
@@ -79,7 +69,19 @@ public class GameController : MonoBehaviour {
         {
             state = new GameState();
         }
+    }
 
+    IEnumerator OnLevelWasLoaded(int lvl)
+    {
+        if (this.player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+        player.transform.position = spawnPoint.transform.position;
+        GameObject mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+        mainCam.GetComponent<FollowingCamera>().SetTarget(player.transform);
         yield return new WaitForSeconds(0.1f);
 
         this.SetState(Phase.Planning);
@@ -94,7 +96,36 @@ public class GameController : MonoBehaviour {
     {
         // Change level.
         this.state.currentLevel = level;
+        this.CleanUp();
         Application.LoadLevel(level.ToString());
+    }
+
+    void CleanUp()
+    {
+        GameObject[] gObjs = GameObject.FindGameObjectsWithTag("Trap");
+        foreach (GameObject gObj in gObjs)
+        {
+            this.AddTraps(gObj, 1);
+            GameObject.Destroy(gObj);
+        }
+
+        gObjs = GameObject.FindGameObjectsWithTag("Waves");
+        foreach (GameObject gObj in gObjs)
+        {
+            GameObject.Destroy(gObj);
+        }
+
+        gObjs = GameObject.FindGameObjectsWithTag("Effect");
+        foreach (GameObject gObj in gObjs)
+        {
+            GameObject.Destroy(gObj);
+        }
+
+        gObjs = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (GameObject gObj in gObjs)
+        {
+            GameObject.Destroy(gObj);
+        }
     }
 
     // TODO:

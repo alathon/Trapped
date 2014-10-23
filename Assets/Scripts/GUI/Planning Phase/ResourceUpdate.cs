@@ -13,6 +13,11 @@ public class ResourceUpdate : MonoBehaviour {
         this.resourceText = this.GetComponent<Text>();
     }
 
+    void OnDestroy()
+    {
+        GameController controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        controller.ResourceChanged -= OnResourceChange;
+    }
     public void OnResourceChange(int newCount)
     {
         this.resourceText.text = newCount.ToString();

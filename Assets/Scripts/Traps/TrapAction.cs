@@ -45,6 +45,11 @@ public class TrapAction : MonoBehaviour {
         this.controller.PhaseChanged += new GameController.PhaseChangedHandler(OnPhaseChange);
     }
 
+    void OnDestroy()
+    {
+        this.controller.PhaseChanged -= OnPhaseChange;
+    }
+
     public void OnPhaseChange(Phase newPhase)
     {
         this.Reset();
@@ -54,13 +59,13 @@ public class TrapAction : MonoBehaviour {
     {
         this.inUse = false;
         this.StopAllCoroutines();
-        this.SendMessage("OnUseUpdate", this.inUse);
+        SendMessage("OnUseUpdate", this.inUse, SendMessageOptions.DontRequireReceiver);
     }
 
     protected virtual IEnumerator Windup()
     {
         this.inUse = true;
-        SendMessage("OnUseUpdate", this.inUse);
+        SendMessage("OnUseUpdate", this.inUse, SendMessageOptions.DontRequireReceiver);
         if (this.windupClip != null)
         {
             this.controller.GetComponent<AudioController>().PlaySFX(this.windupClip);
@@ -81,7 +86,7 @@ public class TrapAction : MonoBehaviour {
     {
         yield return new WaitForSeconds(this.reuseTime);
         this.inUse = false;
-        SendMessage("OnUseUpdate", this.inUse);
+        SendMessage("OnUseUpdate", this.inUse, SendMessageOptions.DontRequireReceiver);
     }
 
     protected virtual IEnumerator Action()

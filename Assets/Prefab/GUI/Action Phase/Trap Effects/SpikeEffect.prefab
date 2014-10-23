@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: SpikeEffect
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   destroyOnHit: 1
+  hitOnce: 1
   stunDuration: 3.5
 --- !u!212 &21200000
 SpriteRenderer:
